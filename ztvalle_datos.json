@@ -1,0 +1,121 @@
+{
+  "version": "2026-06-14",
+  "subestaciones": [
+    {
+      "codigo": "AGS", "nombre": "Agrícola Sonoyta",
+      "voltajes": "115kV / 34.5kV", "proceso": "SUBTRANSMISIÓN", "tipo": "CONV.",
+      "arreglo": "B. SENCLL", "mva_op": 0, "mva_res": 0, "mvar_reac_op": 0, "mvar_reac_res": 0,
+      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "P. ELÍAS CALLES", "clase": "A",
+      "fecha": "ENE-1986", "lat": 30.5957, "lon": -113.2147,
+      "lineas": [{ "code": "73080", "colateral": "SNY" }]
+    },
+    {
+      "codigo": "APD", "nombre": "Aeropuerto Dos",
+      "voltajes": "230kV / 115kV", "proceso": "TRANSMISIÓN", "tipo": "CONV.",
+      "arreglo": "DOBLE BARRA", "mva_op": 450, "mva_res": 100, "mvar_reac_op": 45, "mvar_reac_res": 10,
+      "mvar_cap_op": 30, "mvar_cap_res": 8, "municipio": "MEXICALI", "clase": "A",
+      "fecha": "MAR-1995", "lat": 32.6236, "lon": -115.2417,
+      "lineas": [{ "code": "A3060", "colateral": "CUC" }, { "code": "A3040", "colateral": "GSC" }]
+    },
+    {
+      "codigo": "CFP", "nombre": "Ctral Fotovoltaica Peñasco",
+      "voltajes": "115kV / 34.5kV", "proceso": "GENERACIÓN", "tipo": "GDR",
+      "arreglo": "BARRA SENC", "mva_op": 120, "mva_res": 20, "mvar_reac_op": 0, "mvar_reac_res": 0,
+      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "PTO. PEÑASCO", "clase": "B",
+      "fecha": "JUL-2018", "lat": 31.3236, "lon": -113.5533,
+      "lineas": [{ "code": "73080", "colateral": "AGS" }]
+    },
+    {
+      "codigo": "CHQ", "nombre": "Chapultepec",
+      "voltajes": "230kV / 115kV", "proceso": "TRANSMISIÓN", "tipo": "CONV.",
+      "arreglo": "DOBLE BARRA", "mva_op": 600, "mva_res": 150, "mvar_reac_op": 60, "mvar_reac_res": 15,
+      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "MEXICALI", "clase": "A",
+      "fecha": "FEB-1980", "lat": 32.6637, "lon": -115.4710,
+      "lineas": [{ "code": "A3040", "colateral": "GSC" }, { "code": "73A60", "colateral": "CUC" }]
+    },
+    {
+      "codigo": "CUC", "nombre": "Cucapah",
+      "voltajes": "230kV / 115kV", "proceso": "TRANSMISIÓN", "tipo": "CONV.",
+      "arreglo": "INTERRUPTOR Y MEDIO", "mva_op": 900, "mva_res": 200, "mvar_reac_op": 90, "mvar_reac_res": 20,
+      "mvar_cap_op": 60, "mvar_cap_res": 15, "municipio": "MEXICALI", "clase": "A",
+      "fecha": "JUN-1975", "lat": 32.5947, "lon": -115.3782,
+      "lineas": [{ "code": "A3060", "colateral": "GSC" }, { "code": "73A60", "colateral": "CHQ" }, { "code": "73A10", "colateral": "ROA" }]
+    },
+    {
+      "codigo": "GSC", "nombre": "Gasca",
+      "voltajes": "230kV / 115kV", "proceso": "TRANSMISIÓN", "tipo": "CONV.",
+      "arreglo": "DOBLE BARRA", "mva_op": 750, "mva_res": 180, "mvar_reac_op": 75, "mvar_reac_res": 18,
+      "mvar_cap_op": 45, "mvar_cap_res": 10, "municipio": "MEXICALI", "clase": "A",
+      "fecha": "AGO-1988", "lat": 32.4891, "lon": -115.1234,
+      "lineas": [{ "code": "A3060", "colateral": "CUC" }, { "code": "A3040", "colateral": "CHQ" }]
+    },
+    {
+      "codigo": "ROA", "nombre": "Río Algodones",
+      "voltajes": "115kV / 34.5kV", "proceso": "SUBTRANSMISIÓN", "tipo": "CONV.",
+      "arreglo": "B. SENCLL", "mva_op": 80, "mva_res": 20, "mvar_reac_op": 0, "mvar_reac_res": 0,
+      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "SAN LUIS R.C.", "clase": "B",
+      "fecha": "NOV-1993", "lat": 32.1123, "lon": -114.7234,
+      "lineas": [{ "code": "73A10", "colateral": "CUC" }]
+    },
+    {
+      "codigo": "SNY", "nombre": "Sonoyta",
+      "voltajes": "115kV / 34.5kV", "proceso": "SUBTRANSMISIÓN", "tipo": "CONV.",
+      "arreglo": "B. SENCLL", "mva_op": 60, "mva_res": 15, "mvar_reac_op": 0, "mvar_reac_res": 0,
+      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "PLUTARCO E. CALLES", "clase": "B",
+      "fecha": "MAY-1990", "lat": 31.8687, "lon": -112.8509,
+      "lineas": [{ "code": "73080", "colateral": "AGS" }]
+    }
+  ],
+  "lineas": [
+    {
+      "code": "A3060", "kv": "230kV",
+      "inicio": "CUC", "fin": "GSC", "distancia": "145.24",
+      "conductor": "BLUEJAY", "material": "ACSR", "estructuras": 350,
+      "torres": [
+        { "num": 1, "lat": 32.5947, "lon": -115.3782, "label": "EST-001 · Torre inicio CUC" },
+        { "num": 50, "lat": 32.5600, "lon": -115.3200, "label": "EST-050" },
+        { "num": 100, "lat": 32.5300, "lon": -115.2800, "label": "EST-100" },
+        { "num": 200, "lat": 32.5100, "lon": -115.2200, "label": "EST-200" },
+        { "num": 300, "lat": 32.4980, "lon": -115.1600, "label": "EST-300" },
+        { "num": 350, "lat": 32.4891, "lon": -115.1234, "label": "EST-350 · Torre fin GSC" }
+      ]
+    },
+    {
+      "code": "A3040", "kv": "230kV",
+      "inicio": "CHQ", "fin": "GSC", "distancia": "98.17",
+      "conductor": "CARDINAL", "material": "ACSR", "estructuras": 248,
+      "torres": [
+        { "num": 1, "lat": 32.6637, "lon": -115.4710, "label": "EST-001 · Torre inicio CHQ" },
+        { "num": 100, "lat": 32.5800, "lon": -115.3500, "label": "EST-100" },
+        { "num": 248, "lat": 32.4891, "lon": -115.1234, "label": "EST-248 · Torre fin GSC" }
+      ]
+    },
+    {
+      "code": "73A60", "kv": "115kV",
+      "inicio": "CUC", "fin": "CHQ", "distancia": "22.50",
+      "conductor": "HAWK", "material": "ACSR", "estructuras": 68,
+      "torres": [
+        { "num": 1, "lat": 32.5947, "lon": -115.3782, "label": "EST-001 · Torre inicio CUC" },
+        { "num": 34, "lat": 32.6291, "lon": -115.4246, "label": "EST-034" },
+        { "num": 68, "lat": 32.6637, "lon": -115.4710, "label": "EST-068 · Torre fin CHQ" }
+      ]
+    },
+    {
+      "code": "73A10", "kv": "115kV",
+      "inicio": "CUC", "fin": "ROA", "distancia": "67.80",
+      "conductor": "HAWK", "material": "ACSR", "estructuras": 190,
+      "torres": [
+        { "num": 1, "lat": 32.5947, "lon": -115.3782, "label": "EST-001 · Torre inicio CUC" },
+        { "num": 95, "lat": 32.3535, "lon": -115.0508, "label": "EST-095" },
+        { "num": 190, "lat": 32.1123, "lon": -114.7234, "label": "EST-190 · Torre fin ROA" }
+      ]
+    }
+  ],
+  "unifilares": [
+    { "nombre": "SE Agrícola Sonoyta", "kv": "115kV", "codigo": "AGS" },
+    { "nombre": "SE Carranza", "kv": "161kV", "codigo": "CAR" },
+    { "nombre": "SE Centenario", "kv": "230kV", "codigo": "CEN" },
+    { "nombre": "SE Río Nuevo", "kv": "161kV", "codigo": "RON" },
+    { "nombre": "SE Cucapah", "kv": "230kV", "codigo": "CUC" }
+  ]
+}

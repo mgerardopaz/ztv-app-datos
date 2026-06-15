@@ -1,121 +1,3406 @@
 {
-  "version": "2026-06-14",
-  "subestaciones": [
-    {
-      "codigo": "AGS", "nombre": "Agrícola Sonoyta",
-      "voltajes": "115kV / 34.5kV", "proceso": "SUBTRANSMISIÓN", "tipo": "CONV.",
-      "arreglo": "B. SENCLL", "mva_op": 0, "mva_res": 0, "mvar_reac_op": 0, "mvar_reac_res": 0,
-      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "P. ELÍAS CALLES", "clase": "A",
-      "fecha": "ENE-1986", "lat": 30.5957, "lon": -113.2147,
-      "lineas": [{ "code": "73080", "colateral": "SNY" }]
+  "version": 3,
+  "generado": "2026-06-15",
+  "fuente": "Subestaciones_con_colaterales_ultimo.xlsx (hojas SE + LINEAS)",
+  "notas": "Colaterales tomados directo de columnas COL1-COL10 de hoja SE. Ver 'casos_especiales' para huecos pendientes.",
+  "casos_especiales": {
+    "datos_incompletos": [
+      {
+        "linea": "83290",
+        "extremos": "LMA - GOR",
+        "faltan": [
+          "fecha_op",
+          "distancia_km",
+          "estructuras"
+        ]
+      },
+      {
+        "linea": "83310",
+        "extremos": "MCI - LMA",
+        "faltan": [
+          "fecha_op",
+          "distancia_km",
+          "estructuras"
+        ]
+      },
+      {
+        "linea": "83470",
+        "extremos": "GOR - MOE",
+        "faltan": [
+          "fecha_op",
+          "distancia_km",
+          "estructuras"
+        ]
+      },
+      {
+        "linea": "93920",
+        "extremos": "CIA - LRC",
+        "faltan": [
+          "fecha_op",
+          "distancia_km",
+          "estructuras"
+        ]
+      },
+      {
+        "linea": "93940",
+        "extremos": "LRC - PID",
+        "faltan": [
+          "fecha_op",
+          "distancia_km",
+          "estructuras"
+        ]
+      },
+      {
+        "linea": "93970",
+        "extremos": "RZC - PID",
+        "faltan": [
+          "fecha_op",
+          "distancia_km",
+          "estructuras"
+        ]
+      }
+    ],
+    "huerfanos": [
+      {
+        "subestacion": "SMA",
+        "linea_referida": "73150",
+        "colateral": "TRI"
+      }
+    ],
+    "no_referenciadas": [
+      {
+        "linea": "63150",
+        "extremos": "PB1 - PB0"
+      },
+      {
+        "linea": "63160",
+        "extremos": "PB1 - PB2"
+      },
+      {
+        "linea": "63170",
+        "extremos": "PB2 - PB3"
+      },
+      {
+        "linea": "63180",
+        "extremos": "PB4 - PB5"
+      },
+      {
+        "linea": "83120E",
+        "extremos": "FEV - -"
+      }
+    ],
+    "sin_colaterales": [
+      "LPN",
+      "PYE"
+    ]
+  },
+  "subestaciones": {
+    "AGS": {
+      "nombre": "AGRICOLA SONOYTA",
+      "voltajes": "115/34.5",
+      "pserv": "ENE-1986",
+      "proceso": "SUBTRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "P. ELIAS CALLES",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL",
+      "lineas": [
+        {
+          "code": "73080",
+          "colateral": "SNY"
+        }
+      ],
+      "lineas_completo": true
     },
-    {
-      "codigo": "APD", "nombre": "Aeropuerto Dos",
-      "voltajes": "230kV / 115kV", "proceso": "TRANSMISIÓN", "tipo": "CONV.",
-      "arreglo": "DOBLE BARRA", "mva_op": 450, "mva_res": 100, "mvar_reac_op": 45, "mvar_reac_res": 10,
-      "mvar_cap_op": 30, "mvar_cap_res": 8, "municipio": "MEXICALI", "clase": "A",
-      "fecha": "MAR-1995", "lat": 32.6236, "lon": -115.2417,
-      "lineas": [{ "code": "A3060", "colateral": "CUC" }, { "code": "A3040", "colateral": "GSC" }]
+    "APD": {
+      "nombre": "AEROPUERTO II",
+      "voltajes": "230/13.8",
+      "pserv": "MAY-1986",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "93840",
+          "colateral": "LMA"
+        },
+        {
+          "code": "93230",
+          "colateral": "CTY"
+        }
+      ],
+      "lineas_completo": true
     },
-    {
-      "codigo": "CFP", "nombre": "Ctral Fotovoltaica Peñasco",
-      "voltajes": "115kV / 34.5kV", "proceso": "GENERACIÓN", "tipo": "GDR",
-      "arreglo": "BARRA SENC", "mva_op": 120, "mva_res": 20, "mvar_reac_op": 0, "mvar_reac_res": 0,
-      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "PTO. PEÑASCO", "clase": "B",
-      "fecha": "JUL-2018", "lat": 31.3236, "lon": -113.5533,
-      "lineas": [{ "code": "73080", "colateral": "AGS" }]
+    "CFP": {
+      "nombre": "CTRL FOTOV PTO PEÑASCO",
+      "voltajes": 400,
+      "pserv": "JUN-2024",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 49.98,
+      "mvar_reac_res": 16.66,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0.3,
+      "mva_regul": 0,
+      "municipio": "PTO PEÑASCO",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "INT. Y MEDIO.",
+      "lineas": [
+        {
+          "code": "A3040",
+          "colateral": "GSC"
+        }
+      ],
+      "lineas_completo": true
     },
-    {
-      "codigo": "CHQ", "nombre": "Chapultepec",
-      "voltajes": "230kV / 115kV", "proceso": "TRANSMISIÓN", "tipo": "CONV.",
-      "arreglo": "DOBLE BARRA", "mva_op": 600, "mva_res": 150, "mvar_reac_op": 60, "mvar_reac_res": 15,
-      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "MEXICALI", "clase": "A",
-      "fecha": "FEB-1980", "lat": 32.6637, "lon": -115.4710,
-      "lineas": [{ "code": "A3040", "colateral": "GSC" }, { "code": "73A60", "colateral": "CUC" }]
+    "CHQ": {
+      "nombre": "CHAPULTEPEC",
+      "voltajes": "230/34.5",
+      "pserv": "DIC-1993",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "93810",
+          "colateral": "CIA"
+        },
+        {
+          "code": "93470",
+          "colateral": "CPD"
+        }
+      ],
+      "lineas_completo": true
     },
-    {
-      "codigo": "CUC", "nombre": "Cucapah",
-      "voltajes": "230kV / 115kV", "proceso": "TRANSMISIÓN", "tipo": "CONV.",
-      "arreglo": "INTERRUPTOR Y MEDIO", "mva_op": 900, "mva_res": 200, "mvar_reac_op": 90, "mvar_reac_res": 20,
-      "mvar_cap_op": 60, "mvar_cap_res": 15, "municipio": "MEXICALI", "clase": "A",
-      "fecha": "JUN-1975", "lat": 32.5947, "lon": -115.3782,
-      "lineas": [{ "code": "A3060", "colateral": "GSC" }, { "code": "73A60", "colateral": "CHQ" }, { "code": "73A10", "colateral": "ROA" }]
+    "CIA": {
+      "nombre": "CI ALTAR",
+      "voltajes": 230,
+      "pserv": "MAR-2024",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "SAN LUIS RC",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "93810",
+          "colateral": "CHQ"
+        },
+        {
+          "code": "93920",
+          "colateral": "LRC"
+        }
+      ],
+      "lineas_completo": true
     },
-    {
-      "codigo": "GSC", "nombre": "Gasca",
-      "voltajes": "230kV / 115kV", "proceso": "TRANSMISIÓN", "tipo": "CONV.",
-      "arreglo": "DOBLE BARRA", "mva_op": 750, "mva_res": 180, "mvar_reac_op": 75, "mvar_reac_res": 18,
-      "mvar_cap_op": 45, "mvar_cap_res": 10, "municipio": "MEXICALI", "clase": "A",
-      "fecha": "AGO-1988", "lat": 32.4891, "lon": -115.1234,
-      "lineas": [{ "code": "A3060", "colateral": "CUC" }, { "code": "A3040", "colateral": "CHQ" }]
+    "CNT": {
+      "nombre": "CENTENARIO",
+      "voltajes": "230/13.8",
+      "pserv": "ENE-2014",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "93570",
+          "colateral": "CUC"
+        },
+        {
+          "code": "93550",
+          "colateral": "ROA"
+        }
+      ],
+      "lineas_completo": true
     },
-    {
-      "codigo": "ROA", "nombre": "Río Algodones",
-      "voltajes": "115kV / 34.5kV", "proceso": "SUBTRANSMISIÓN", "tipo": "CONV.",
-      "arreglo": "B. SENCLL", "mva_op": 80, "mva_res": 20, "mvar_reac_op": 0, "mvar_reac_res": 0,
-      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "SAN LUIS R.C.", "clase": "B",
-      "fecha": "NOV-1993", "lat": 32.1123, "lon": -114.7234,
-      "lineas": [{ "code": "73A10", "colateral": "CUC" }]
+    "CNZ": {
+      "nombre": "CARRANZA",
+      "voltajes": "161/13.8",
+      "pserv": "SEP-2013",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "83350",
+          "colateral": "CTY"
+        },
+        {
+          "code": "83270",
+          "colateral": "GOR"
+        }
+      ],
+      "lineas_completo": true
     },
-    {
-      "codigo": "SNY", "nombre": "Sonoyta",
-      "voltajes": "115kV / 34.5kV", "proceso": "SUBTRANSMISIÓN", "tipo": "CONV.",
-      "arreglo": "B. SENCLL", "mva_op": 60, "mva_res": 15, "mvar_reac_op": 0, "mvar_reac_res": 0,
-      "mvar_cap_op": 0, "mvar_cap_res": 0, "municipio": "PLUTARCO E. CALLES", "clase": "B",
-      "fecha": "MAY-1990", "lat": 31.8687, "lon": -112.8509,
-      "lineas": [{ "code": "73080", "colateral": "AGS" }]
+    "CPC": {
+      "nombre": "CERRO PRIETO IV",
+      "voltajes": "13.8/161",
+      "pserv": "JUN-2000",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "83240",
+          "colateral": "GOR"
+        },
+        {
+          "code": "83250",
+          "colateral": "GOR"
+        },
+        {
+          "code": "83230",
+          "colateral": "CPU"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "CPD": {
+      "nombre": "CERRO PRIETO II",
+      "voltajes": "13.8/230",
+      "pserv": "ENE-1984",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE INT..",
+      "lineas": [
+        {
+          "code": "93470",
+          "colateral": "CHQ"
+        },
+        {
+          "code": "93310",
+          "colateral": "SRY"
+        },
+        {
+          "code": "93240",
+          "colateral": "CUC"
+        },
+        {
+          "code": "93220",
+          "colateral": "CPT"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "CPT": {
+      "nombre": "CERRO PRIETO III",
+      "voltajes": "13.8/230",
+      "pserv": "ENE-1985",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE INT..",
+      "lineas": [
+        {
+          "code": "93260",
+          "colateral": "LMA"
+        },
+        {
+          "code": "93190",
+          "colateral": "CSC"
+        },
+        {
+          "code": "93220",
+          "colateral": "CPD"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "CPU": {
+      "nombre": "CERRO PRIETO I",
+      "voltajes": "161/13.8",
+      "pserv": "MAY-1972",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y B. DE TRANSF.",
+      "lineas": [
+        {
+          "code": "83390",
+          "colateral": "GWY"
+        },
+        {
+          "code": "83230",
+          "colateral": "CPC"
+        },
+        {
+          "code": "83170",
+          "colateral": "RZC"
+        },
+        {
+          "code": "83370",
+          "colateral": "SIS"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "CRO": {
+      "nombre": "CENTRO",
+      "voltajes": "230/161/34.5-13.8",
+      "pserv": "MAY-1973",
+      "proceso": "TRANSMISION",
+      "mva_op": 225,
+      "mva_res": 75,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 22,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "B. DBLE/B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "83180",
+          "colateral": "RIN"
+        },
+        {
+          "code": "93380",
+          "colateral": "OZA"
+        },
+        {
+          "code": "93170",
+          "colateral": "ROA"
+        },
+        {
+          "code": "83130",
+          "colateral": "MXI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "CSC": {
+      "nombre": "SIDERURGICA",
+      "voltajes": "230/34.5",
+      "pserv": "MAY-1992",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "ANILLO",
+      "lineas": [
+        {
+          "code": "93270",
+          "colateral": "MXI"
+        },
+        {
+          "code": "93190",
+          "colateral": "CPT"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "CTY": {
+      "nombre": "CETYS",
+      "voltajes": "230/161/34.5  230/13.8",
+      "pserv": "JUN-1984",
+      "proceso": "TRANSMISION",
+      "mva_op": 100,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 22,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "93230",
+          "colateral": "APD"
+        },
+        {
+          "code": "93290",
+          "colateral": "MCI MOE"
+        },
+        {
+          "code": "83410",
+          "colateral": "SKW"
+        },
+        {
+          "code": "83350",
+          "colateral": "CNZ"
+        },
+        {
+          "code": "83320",
+          "colateral": "PKD"
+        },
+        {
+          "code": "83280",
+          "colateral": "MOE"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "CUC": {
+      "nombre": "CUCAPAH",
+      "voltajes": "400/230 ",
+      "pserv": "JUN-2024",
+      "proceso": "TRANSMISION",
+      "mva_op": 375,
+      "mva_res": 125,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0.3,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "INT. Y MEDIO.",
+      "lineas": [
+        {
+          "code": "A3060",
+          "colateral": "GSC"
+        },
+        {
+          "code": "93870",
+          "colateral": "STB"
+        },
+        {
+          "code": "93860",
+          "colateral": "WIS"
+        },
+        {
+          "code": "93570",
+          "colateral": "CNT"
+        },
+        {
+          "code": "93240",
+          "colateral": "CPD"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "ENT": {
+      "nombre": "ENTROQUE MINERA",
+      "voltajes": 115,
+      "pserv": "ENE-1992",
+      "proceso": "SUBTRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 9,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "CARGA RADIAL EN TAP",
+      "lineas": [
+        {
+          "code": "73170",
+          "colateral": "MIN"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "GOR": {
+      "nombre": "GONZALEZ ORTEGA",
+      "voltajes": "161/34.5-13.8",
+      "pserv": "JUN-2002",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 22,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "83270",
+          "colateral": "CNZ"
+        },
+        {
+          "code": "83440",
+          "colateral": "MCI"
+        },
+        {
+          "code": "83290",
+          "colateral": "LMA"
+        },
+        {
+          "code": "83240",
+          "colateral": "CPC"
+        },
+        {
+          "code": "83250",
+          "colateral": "CPC"
+        },
+        {
+          "code": "83470",
+          "colateral": "MOE"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "GSC": {
+      "nombre": "GOLFO DE SANTA CLARA",
+      "voltajes": 400,
+      "pserv": "JUN-2024",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 150,
+      "mvar_reac_res": 25,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0.3,
+      "mva_regul": 0,
+      "municipio": "SAN LUIS RC",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "INT. Y MEDIO.",
+      "lineas": [
+        {
+          "code": "A3040",
+          "colateral": "CFV"
+        },
+        {
+          "code": "A3060",
+          "colateral": "CUC"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "GWY": {
+      "nombre": "GATEWAY",
+      "voltajes": 161,
+      "pserv": "MAR-2021",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "ANILLO",
+      "lineas": [
+        {
+          "code": "83120",
+          "colateral": "MXI"
+        },
+        {
+          "code": "83390",
+          "colateral": "CPU"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "HGO": {
+      "nombre": "HIDALGO",
+      "voltajes": "161/13.8",
+      "pserv": "AGO-1982",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "SAN LUIS RC",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "83330",
+          "colateral": "PID"
+        },
+        {
+          "code": "83160",
+          "colateral": "RZC"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "KCH": {
+      "nombre": "CACHANILLA",
+      "voltajes": "161/13.8",
+      "pserv": "MAR-2016",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 22,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "83220",
+          "colateral": "RIN"
+        },
+        {
+          "code": "83260",
+          "colateral": "SIS"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "LCH": {
+      "nombre": "LA CHOLLA",
+      "voltajes": "115/13.8",
+      "pserv": "ENE-2009",
+      "proceso": "SUBTRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "PTO PEÑASCO",
+      "clase": "A",
+      "tipo": "GIS",
+      "arreglo": "B. SENCLL",
+      "lineas": [
+        {
+          "code": "73690",
+          "colateral": "PPA"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "LMA": {
+      "nombre": "LIBRMBRAS",
+      "voltajes": 230,
+      "pserv": "MAY-2024",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "93830",
+          "colateral": "STB"
+        },
+        {
+          "code": "93640",
+          "colateral": "VPA"
+        },
+        {
+          "code": "93840",
+          "colateral": "APD"
+        },
+        {
+          "code": "93260",
+          "colateral": "CPT"
+        },
+        {
+          "code": "83360",
+          "colateral": "MXI"
+        },
+        {
+          "code": "83290",
+          "colateral": "GOR"
+        },
+        {
+          "code": "83310",
+          "colateral": "MCI"
+        },
+        {
+          "code": "83150",
+          "colateral": "RZC"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "LPN": {
+      "nombre": "LA PINTA",
+      "voltajes": "115/13.8",
+      "pserv": "ENE-1999",
+      "proceso": "SUBTRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "PTO PEÑASCO",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "CARGA RADIAL EN TAP",
+      "lineas": [],
+      "lineas_completo": false
+    },
+    "LRC": {
+      "nombre": "CCC SAN LUIS RC",
+      "voltajes": 230,
+      "pserv": "MAY-2024",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "SAN LUIS RC",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "93940",
+          "colateral": "PID"
+        },
+        {
+          "code": "93480",
+          "colateral": "PID"
+        },
+        {
+          "code": "93650",
+          "colateral": "SRY"
+        },
+        {
+          "code": "93920",
+          "colateral": "CIA"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "MCI": {
+      "nombre": "MXL OTE CCI",
+      "voltajes": 230,
+      "pserv": "MAY-2024",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "93850",
+          "colateral": "TEK"
+        },
+        {
+          "code": "93290",
+          "colateral": "CTY"
+        },
+        {
+          "code": "83440",
+          "colateral": "GOR"
+        },
+        {
+          "code": "83310",
+          "colateral": "LMA"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "MOE": {
+      "nombre": "MEXICALI ORIENTE",
+      "voltajes": "161/34.5-13.8",
+      "pserv": "JUN-2002",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 22,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "83280",
+          "colateral": "CTY"
+        },
+        {
+          "code": "83250",
+          "colateral": "CPC"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "MPP": {
+      "nombre": "MBRAS PTO PEÑASCO",
+      "voltajes": 115,
+      "pserv": "ENE-2023",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "PTO PEÑASCO",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "73A60",
+          "colateral": "PPA"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "MXI": {
+      "nombre": "MEXICALI",
+      "voltajes": "230/161/34.5 230/13.8",
+      "pserv": "AGO-1963",
+      "proceso": "TRANSMISION",
+      "mva_op": 200,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 22,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": " AAA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y B. DE TRANSF.",
+      "lineas": [
+        {
+          "code": "93720",
+          "colateral": "TEK"
+        },
+        {
+          "code": "93360",
+          "colateral": "XCO"
+        },
+        {
+          "code": "93250",
+          "colateral": "WIS"
+        },
+        {
+          "code": "93210",
+          "colateral": "STB"
+        },
+        {
+          "code": "83380",
+          "colateral": "SIS"
+        },
+        {
+          "code": "83140",
+          "colateral": "PKD"
+        },
+        {
+          "code": "83130",
+          "colateral": "CRO"
+        },
+        {
+          "code": "93270",
+          "colateral": "CSC"
+        },
+        {
+          "code": "83360",
+          "colateral": "LMA"
+        },
+        {
+          "code": "83120",
+          "colateral": "GWY"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "NZI": {
+      "nombre": "NACOZARI",
+      "voltajes": "161/13.8",
+      "pserv": "ABR-1982",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "83210",
+          "colateral": "SIS"
+        },
+        {
+          "code": "83190",
+          "colateral": "SKW"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "ORI": {
+      "nombre": "ORIENTE",
+      "voltajes": "115/13.8  13.8/34.5",
+      "pserv": "ENE-2006",
+      "proceso": "SUBTRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "PTO PEÑASCO",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL",
+      "lineas": [
+        {
+          "code": "73680",
+          "colateral": "SNY"
+        },
+        {
+          "code": "73070",
+          "colateral": "PPA"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "OZA": {
+      "nombre": "ORIZABA",
+      "voltajes": "230/13.8",
+      "pserv": "JUL-1985",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "93590",
+          "colateral": "WIS"
+        },
+        {
+          "code": "93390",
+          "colateral": "MIT"
+        },
+        {
+          "code": "93380",
+          "colateral": "CRO"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "PID": {
+      "nombre": "P. IND SAN LUIS",
+      "voltajes": "230/34.5  230/161/13.8",
+      "pserv": "JUN-2002",
+      "proceso": "TRANSMISION",
+      "mva_op": 225,
+      "mva_res": 75,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "SAN LUIS RC",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE ARREGL DOBLE B. B.",
+      "lineas": [
+        {
+          "code": "93940",
+          "colateral": "LRC"
+        },
+        {
+          "code": "93480",
+          "colateral": "LRC"
+        },
+        {
+          "code": "93970",
+          "colateral": "RZC"
+        },
+        {
+          "code": "83340",
+          "colateral": "RZC"
+        },
+        {
+          "code": "83330",
+          "colateral": "HGO"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "PKD": {
+      "nombre": "PACKARD",
+      "voltajes": "161/13.8",
+      "pserv": "FEB-2004",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "83320",
+          "colateral": "CTY"
+        },
+        {
+          "code": "83140",
+          "colateral": "MXI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "PPA": {
+      "nombre": "PUERTO PEÑASCO",
+      "voltajes": "115/13.8",
+      "pserv": "ENE-1979",
+      "proceso": "SUBTRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 22.5,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "PTO PEÑASCO",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL",
+      "lineas": [
+        {
+          "code": "73A60",
+          "colateral": "MPP"
+        },
+        {
+          "code": "73A10",
+          "colateral": "SSA"
+        },
+        {
+          "code": "73690",
+          "colateral": "LCH"
+        },
+        {
+          "code": "73070",
+          "colateral": "ORI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "PYE": {
+      "nombre": "PLAYA ENCANTO",
+      "voltajes": "115/13.8",
+      "pserv": "ENE-2011",
+      "proceso": "SUBTRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "PTO PEÑASCO",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "CARGA RADIAL EN TAP",
+      "lineas": [],
+      "lineas_completo": false
+    },
+    "RIN": {
+      "nombre": "RIO NUEVO",
+      "voltajes": "161/13.8",
+      "pserv": "MAY-1983",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "83220",
+          "colateral": "KCH"
+        },
+        {
+          "code": "83180",
+          "colateral": "CRO"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "ROA": {
+      "nombre": "ROSITA",
+      "voltajes": "230  69/13.8",
+      "pserv": "SEP-1984",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "INT. Y MEDIO.",
+      "lineas": [
+        {
+          "code": "93710",
+          "colateral": "SIS"
+        },
+        {
+          "code": "93690",
+          "colateral": "SIS"
+        },
+        {
+          "code": "93550",
+          "colateral": "CNT"
+        },
+        {
+          "code": "93180",
+          "colateral": "SIS"
+        },
+        {
+          "code": "93170",
+          "colateral": "CRO"
+        },
+        {
+          "code": "23050",
+          "colateral": "FTA"
+        },
+        {
+          "code": "93660",
+          "colateral": "WIS"
+        },
+        {
+          "code": "93280",
+          "colateral": "HRA"
+        },
+        {
+          "code": "93160",
+          "colateral": "RUM"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "RUM": {
+      "nombre": "RUMOROSA",
+      "voltajes": "230/69/13.8",
+      "pserv": "AGO-1977",
+      "proceso": "TRANSMISION",
+      "mva_op": 100,
+      "mva_res": 33.33,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 22,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "TECATE",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "93160",
+          "colateral": "ROA"
+        },
+        {
+          "code": "93150",
+          "colateral": "HRA"
+        },
+        {
+          "code": "63140",
+          "colateral": "PB0"
+        },
+        {
+          "code": "63130",
+          "colateral": "PB3"
+        },
+        {
+          "code": "63120",
+          "colateral": "PB4"
+        },
+        {
+          "code": "63110",
+          "colateral": "PB5"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "RZC": {
+      "nombre": "RUIZ CORTINEZ",
+      "voltajes": "230/161 161/34.5",
+      "pserv": "MAR-1970",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 34,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y B. DE TRANSF.",
+      "lineas": [
+        {
+          "code": "83340",
+          "colateral": "PID"
+        },
+        {
+          "code": "83160",
+          "colateral": "HGO"
+        },
+        {
+          "code": "83150",
+          "colateral": "LMA"
+        },
+        {
+          "code": "83170",
+          "colateral": "CPU"
+        },
+        {
+          "code": "93970",
+          "colateral": "PID"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "SAF": {
+      "nombre": "SAN FELIPE",
+      "voltajes": "115/13.8",
+      "pserv": "ENE-1982",
+      "proceso": "SUBTRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 7.5,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL",
+      "lineas": [
+        {
+          "code": "73410",
+          "colateral": "SMA"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "SIS": {
+      "nombre": "SANTA ISABEL",
+      "voltajes": "230/161/34.5-13.8",
+      "pserv": "JUN-2002",
+      "proceso": "TRANSMISION",
+      "mva_op": 450,
+      "mva_res": 75,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "DBLE ARREGL DOBLE B. B.",
+      "lineas": [
+        {
+          "code": "93670",
+          "colateral": "WIS"
+        },
+        {
+          "code": "83370",
+          "colateral": "CPU"
+        },
+        {
+          "code": "83260",
+          "colateral": "KCH"
+        },
+        {
+          "code": "93710",
+          "colateral": "ROA"
+        },
+        {
+          "code": "93690",
+          "colateral": "ROA"
+        },
+        {
+          "code": "93180",
+          "colateral": "ROA"
+        },
+        {
+          "code": "83380",
+          "colateral": "MXI"
+        },
+        {
+          "code": "83210",
+          "colateral": "NZI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "SKW": {
+      "nombre": "SKYWORKS",
+      "voltajes": 161,
+      "pserv": "ENE-2018",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "ANILLO",
+      "lineas": [
+        {
+          "code": "83410",
+          "colateral": "CTY"
+        },
+        {
+          "code": "83190",
+          "colateral": "NZI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "SMA": {
+      "nombre": "MBRAS SAN MATIAS",
+      "voltajes": 115,
+      "pserv": "DIC-2019",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0.3,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "73410",
+          "colateral": "SAF"
+        },
+        {
+          "code": "73150",
+          "colateral": "TRI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "SNY": {
+      "nombre": "SONOYTA",
+      "voltajes": "115/34.5",
+      "pserv": "ENE-1986",
+      "proceso": "SUBTRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 5.39,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "P. ELIAS CALLES",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL",
+      "lineas": [
+        {
+          "code": "73080",
+          "colateral": "AGS"
+        },
+        {
+          "code": "73680",
+          "colateral": "ORI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "SRY": {
+      "nombre": "SAN LUIS REY",
+      "voltajes": "230/13.8",
+      "pserv": "NOV-2014",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "SAN LUIS RC",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "93650",
+          "colateral": "PID"
+        },
+        {
+          "code": "93310",
+          "colateral": "CPD"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "STB": {
+      "nombre": "SANCHEZ TABOADA",
+      "voltajes": "230/13.8",
+      "pserv": "MAY-1992",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "93490",
+          "colateral": "THO"
+        },
+        {
+          "code": "93370",
+          "colateral": "DWO"
+        },
+        {
+          "code": "93870",
+          "colateral": "CUC"
+        },
+        {
+          "code": "93830",
+          "colateral": "LMA"
+        },
+        {
+          "code": "93210",
+          "colateral": "MXI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "TEK": {
+      "nombre": "TECNOLOGICO",
+      "voltajes": "230/34.5-13.8  14.4/230",
+      "pserv": "JUL-1987",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 200,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 75,
+      "mvar_rama_capa_cev": 200,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "A",
+      "tipo": "CONV.",
+      "arreglo": "B. SENCLL Y TRANSF.",
+      "lineas": [
+        {
+          "code": "93320",
+          "colateral": "VPA"
+        },
+        {
+          "code": "93850",
+          "colateral": "CCI MOE"
+        },
+        {
+          "code": "93720",
+          "colateral": "MXI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "VPA": {
+      "nombre": "VALLE DE PUEBLA",
+      "voltajes": "230/13.8",
+      "pserv": "MAR-2012",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "93640",
+          "colateral": "LMA"
+        },
+        {
+          "code": "93320",
+          "colateral": "TEK"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "WIS": {
+      "nombre": "WISTERIA",
+      "voltajes": "230/13.8",
+      "pserv": "OCT-1994",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AAA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "93660",
+          "colateral": "ROA"
+        },
+        {
+          "code": "93860",
+          "colateral": "CUC"
+        },
+        {
+          "code": "93670",
+          "colateral": "SIS"
+        },
+        {
+          "code": "93620",
+          "colateral": "XCO"
+        },
+        {
+          "code": "93590",
+          "colateral": "OZA"
+        },
+        {
+          "code": "93250",
+          "colateral": "MXI"
+        }
+      ],
+      "lineas_completo": true
+    },
+    "XCO": {
+      "nombre": "XOCHIMILCO",
+      "voltajes": "230/13.8",
+      "pserv": "JUN-2007",
+      "proceso": "TRANSMISION",
+      "mva_op": 0,
+      "mva_res": 0,
+      "mvar_reac_op": 0,
+      "mvar_reac_res": 0,
+      "mvar_cap_op": 0,
+      "mvar_cap_res": 0,
+      "mva_transf_cev": 0,
+      "mva_reser_transf_cev": 0,
+      "mvar_rama_induc_cev": 0,
+      "mvar_rama_capa_cev": 0,
+      "mva_serv_prop_op": 0,
+      "mva_regul": 0,
+      "municipio": "MEXICALI",
+      "clase": "AA",
+      "tipo": "CONV.",
+      "arreglo": "DBLE B.",
+      "lineas": [
+        {
+          "code": "93620",
+          "colateral": "WIS"
+        },
+        {
+          "code": "93360",
+          "colateral": "MXI"
+        }
+      ],
+      "lineas_completo": true
     }
-  ],
-  "lineas": [
-    {
-      "code": "A3060", "kv": "230kV",
-      "inicio": "CUC", "fin": "GSC", "distancia": "145.24",
-      "conductor": "BLUEJAY", "material": "ACSR", "estructuras": 350,
-      "torres": [
-        { "num": 1, "lat": 32.5947, "lon": -115.3782, "label": "EST-001 · Torre inicio CUC" },
-        { "num": 50, "lat": 32.5600, "lon": -115.3200, "label": "EST-050" },
-        { "num": 100, "lat": 32.5300, "lon": -115.2800, "label": "EST-100" },
-        { "num": 200, "lat": 32.5100, "lon": -115.2200, "label": "EST-200" },
-        { "num": 300, "lat": 32.4980, "lon": -115.1600, "label": "EST-300" },
-        { "num": 350, "lat": 32.4891, "lon": -115.1234, "label": "EST-350 · Torre fin GSC" }
-      ]
+  },
+  "lineas": {
+    "23050": {
+      "inicio": "ROA",
+      "final": "FTA",
+      "fecha_op": "1984-10-18",
+      "distancia_km": 6.5,
+      "tipo": "AEREA",
+      "km_aereo": 6.5,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 23,
+      "conductor": "CANARY",
+      "material": "ACSS/AW",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
     },
-    {
-      "code": "A3040", "kv": "230kV",
-      "inicio": "CHQ", "fin": "GSC", "distancia": "98.17",
-      "conductor": "CARDINAL", "material": "ACSR", "estructuras": 248,
-      "torres": [
-        { "num": 1, "lat": 32.6637, "lon": -115.4710, "label": "EST-001 · Torre inicio CHQ" },
-        { "num": 100, "lat": 32.5800, "lon": -115.3500, "label": "EST-100" },
-        { "num": 248, "lat": 32.4891, "lon": -115.1234, "label": "EST-248 · Torre fin GSC" }
-      ]
+    "63110": {
+      "inicio": "RUM",
+      "final": "PB5",
+      "fecha_op": "1977-01-10",
+      "distancia_km": 7.71,
+      "tipo": "AEREA",
+      "km_aereo": 7.71,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 9,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
     },
-    {
-      "code": "73A60", "kv": "115kV",
-      "inicio": "CUC", "fin": "CHQ", "distancia": "22.50",
-      "conductor": "HAWK", "material": "ACSR", "estructuras": 68,
-      "torres": [
-        { "num": 1, "lat": 32.5947, "lon": -115.3782, "label": "EST-001 · Torre inicio CUC" },
-        { "num": 34, "lat": 32.6291, "lon": -115.4246, "label": "EST-034" },
-        { "num": 68, "lat": 32.6637, "lon": -115.4710, "label": "EST-068 · Torre fin CHQ" }
-      ]
+    "63120": {
+      "inicio": "RUM",
+      "final": "PB4",
+      "fecha_op": "1977-10-01",
+      "distancia_km": 7.22,
+      "tipo": "AEREA",
+      "km_aereo": 7.22,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 9,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
     },
-    {
-      "code": "73A10", "kv": "115kV",
-      "inicio": "CUC", "fin": "ROA", "distancia": "67.80",
-      "conductor": "HAWK", "material": "ACSR", "estructuras": 190,
-      "torres": [
-        { "num": 1, "lat": 32.5947, "lon": -115.3782, "label": "EST-001 · Torre inicio CUC" },
-        { "num": 95, "lat": 32.3535, "lon": -115.0508, "label": "EST-095" },
-        { "num": 190, "lat": 32.1123, "lon": -114.7234, "label": "EST-190 · Torre fin ROA" }
-      ]
+    "63130": {
+      "inicio": "RUM",
+      "final": "PB3",
+      "fecha_op": "1977-01-10",
+      "distancia_km": 3.2,
+      "tipo": "AEREA",
+      "km_aereo": 3.2,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 6,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "63140": {
+      "inicio": "RUM",
+      "final": "PB0",
+      "fecha_op": "1977-01-10",
+      "distancia_km": 35.35,
+      "tipo": "AEREA",
+      "km_aereo": 35.35,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 62,
+      "conductor": null,
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "63150": {
+      "inicio": "PB1",
+      "final": "PB0",
+      "fecha_op": "1977-01-10",
+      "distancia_km": 2.39,
+      "tipo": "AEREA",
+      "km_aereo": 2.39,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 6,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "63160": {
+      "inicio": "PB1",
+      "final": "PB2",
+      "fecha_op": "1977-10-01",
+      "distancia_km": 19.94,
+      "tipo": "AEREA",
+      "km_aereo": 19.94,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 29,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "63170": {
+      "inicio": "PB2",
+      "final": "PB3",
+      "fecha_op": "1977-01-08",
+      "distancia_km": 7.88,
+      "tipo": "AEREA",
+      "km_aereo": 7.88,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 16,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "63180": {
+      "inicio": "PB4",
+      "final": "PB5",
+      "fecha_op": "1977-01-10",
+      "distancia_km": 1.66,
+      "tipo": "AEREA",
+      "km_aereo": 1.66,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 5,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "73070": {
+      "inicio": "PPA",
+      "final": "ORI",
+      "fecha_op": "1983-10-01",
+      "distancia_km": 3.61,
+      "tipo": "AEREA",
+      "km_aereo": 3.61,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 29,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "73080": {
+      "inicio": "SNY",
+      "final": "AGS",
+      "fecha_op": "1986-10-01",
+      "distancia_km": 52.32,
+      "tipo": "AEREA",
+      "km_aereo": 52.32,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 264,
+      "conductor": null,
+      "material": "ACSR/CU",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "73170": {
+      "inicio": "ENT",
+      "final": "MIN",
+      "fecha_op": "1994-01-01",
+      "distancia_km": 53.81,
+      "tipo": "AEREA",
+      "km_aereo": 53.81,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 222,
+      "conductor": null,
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "73410": {
+      "inicio": "SMA",
+      "final": "SAF",
+      "fecha_op": "2019-12-17",
+      "distancia_km": 63,
+      "tipo": "AEREA",
+      "km_aereo": 63,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 41,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "73680": {
+      "inicio": "ORI",
+      "final": "SNY",
+      "fecha_op": "1983-10-01",
+      "distancia_km": 91.38,
+      "tipo": "AEREA",
+      "km_aereo": 91.38,
+      "km_subterraneo": null,
+      "grt_dist": "DIST",
+      "estructuras": 362,
+      "conductor": "HAWK",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "73690": {
+      "inicio": "PPA",
+      "final": "LCH",
+      "fecha_op": "2009-04-28",
+      "distancia_km": 10.27,
+      "tipo": "AEREA",
+      "km_aereo": 0,
+      "km_subterraneo": 10.27,
+      "grt_dist": "DIST",
+      "estructuras": 0,
+      "conductor": null,
+      "material": null,
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83120": {
+      "inicio": "GWY",
+      "final": "MXI",
+      "fecha_op": "1973-04-02",
+      "distancia_km": 11.43,
+      "tipo": "AEREA",
+      "km_aereo": 11.43,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 47,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83130": {
+      "inicio": "MXI",
+      "final": "CRO",
+      "fecha_op": "1972-07-20",
+      "distancia_km": 5.5,
+      "tipo": "AEREA",
+      "km_aereo": 5.5,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 53,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83140": {
+      "inicio": "MXI",
+      "final": "PKD",
+      "fecha_op": "1979-07-17",
+      "distancia_km": 5,
+      "tipo": "MIXTA",
+      "km_aereo": 2.838,
+      "km_subterraneo": 2.162,
+      "grt_dist": null,
+      "estructuras": 24,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83150": {
+      "inicio": "RZC",
+      "final": "LMA",
+      "fecha_op": "1963-10-01",
+      "distancia_km": 49.15,
+      "tipo": "AEREA",
+      "km_aereo": 49.15,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 242,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83160": {
+      "inicio": "RZC",
+      "final": "HGO",
+      "fecha_op": "1982-04-02",
+      "distancia_km": 7,
+      "tipo": "AEREA",
+      "km_aereo": 7,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 64,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83170": {
+      "inicio": "CPU",
+      "final": "RZC",
+      "fecha_op": "1982-07-14",
+      "distancia_km": 46.9,
+      "tipo": "AEREA",
+      "km_aereo": 46.9,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 128,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83180": {
+      "inicio": "CRO",
+      "final": "RIN",
+      "fecha_op": "1983-03-16",
+      "distancia_km": 3.5,
+      "tipo": "AEREA",
+      "km_aereo": 3.5,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 41,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83190": {
+      "inicio": "SKW ",
+      "final": "NZI",
+      "fecha_op": "1982-06-07",
+      "distancia_km": 4,
+      "tipo": "AEREA",
+      "km_aereo": 4,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 46,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83210": {
+      "inicio": "NZI",
+      "final": "SIS",
+      "fecha_op": "1984-12-17",
+      "distancia_km": 18,
+      "tipo": "MIXTA",
+      "km_aereo": 14.9,
+      "km_subterraneo": 3.1,
+      "grt_dist": null,
+      "estructuras": 135,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83220": {
+      "inicio": "KCH",
+      "final": "RIN",
+      "fecha_op": "2007-04-16",
+      "distancia_km": 6.01,
+      "tipo": "MIXTA",
+      "km_aereo": 2.91,
+      "km_subterraneo": 3.1,
+      "grt_dist": null,
+      "estructuras": 13,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83230": {
+      "inicio": "CPU",
+      "final": "CPC",
+      "fecha_op": "2000-03-11",
+      "distancia_km": 6,
+      "tipo": "AEREA",
+      "km_aereo": 6,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 25,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83240": {
+      "inicio": "CPC",
+      "final": "GOR",
+      "fecha_op": "2017-11-14",
+      "distancia_km": 25,
+      "tipo": "AEREA",
+      "km_aereo": 25,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 73,
+      "conductor": "BLUEJAY",
+      "material": "ACSR/AS",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83250": {
+      "inicio": "CPC",
+      "final": "GOR",
+      "fecha_op": "2002-02-12",
+      "distancia_km": 35,
+      "tipo": "AEREA",
+      "km_aereo": 35,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 107,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83260": {
+      "inicio": "SIS",
+      "final": "KCH",
+      "fecha_op": "2007-04-16",
+      "distancia_km": 7.89,
+      "tipo": "AEREA",
+      "km_aereo": 7.89,
+      "km_subterraneo": "-(150MTS)",
+      "grt_dist": null,
+      "estructuras": 50,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83270": {
+      "inicio": "GOR",
+      "final": " CNZ",
+      "fecha_op": "2002-04-26",
+      "distancia_km": 6.41,
+      "tipo": "AEREA",
+      "km_aereo": 6.41,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 21,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83280": {
+      "inicio": "MOE",
+      "final": "CTY",
+      "fecha_op": "2002-03-20",
+      "distancia_km": 6,
+      "tipo": "AEREA",
+      "km_aereo": 6,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 27,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83290": {
+      "inicio": "LMA",
+      "final": "GOR",
+      "fecha_op": null,
+      "distancia_km": null,
+      "tipo": null,
+      "km_aereo": null,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": null,
+      "conductor": null,
+      "material": null,
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83310": {
+      "inicio": "MCI",
+      "final": "LMA",
+      "fecha_op": null,
+      "distancia_km": null,
+      "tipo": null,
+      "km_aereo": null,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": null,
+      "conductor": null,
+      "material": null,
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83320": {
+      "inicio": "PKD",
+      "final": "CTY",
+      "fecha_op": "1982-06-07",
+      "distancia_km": 7,
+      "tipo": "MIXTA",
+      "km_aereo": 4.838,
+      "km_subterraneo": 2.162,
+      "grt_dist": null,
+      "estructuras": 55,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83330": {
+      "inicio": "PID",
+      "final": "HGO",
+      "fecha_op": "1982-07-14",
+      "distancia_km": 29,
+      "tipo": "AEREA",
+      "km_aereo": 29,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 106,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83340": {
+      "inicio": "RZC",
+      "final": "PID",
+      "fecha_op": "1982-07-14",
+      "distancia_km": 28.3,
+      "tipo": "AEREA",
+      "km_aereo": 28.3,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 95,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83350": {
+      "inicio": "CNZ ",
+      "final": "CTY ",
+      "fecha_op": "2002-04-26",
+      "distancia_km": 4.42,
+      "tipo": "AEREA",
+      "km_aereo": 4.42,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 17,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83360": {
+      "inicio": "LMA",
+      "final": "MXI",
+      "fecha_op": "1963-10-01",
+      "distancia_km": 14.21,
+      "tipo": "AEREA",
+      "km_aereo": 14.21,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 114,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83370": {
+      "inicio": "SIS",
+      "final": "CPU",
+      "fecha_op": "2021-02-28",
+      "distancia_km": 44.57,
+      "tipo": "AEREA",
+      "km_aereo": 44.57,
+      "km_subterraneo": "- (200MTS)",
+      "grt_dist": null,
+      "estructuras": 179,
+      "conductor": "DRAKE",
+      "material": "ACSR/AS",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83380": {
+      "inicio": "MXI",
+      "final": "SIS",
+      "fecha_op": "2017-06-28",
+      "distancia_km": 13.57,
+      "tipo": "AEREA",
+      "km_aereo": 13.57,
+      "km_subterraneo": "- (200MTS)",
+      "grt_dist": null,
+      "estructuras": 84,
+      "conductor": "BLUEJAY",
+      "material": "ACSR/AS",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83390": {
+      "inicio": "CPU",
+      "final": "GWY",
+      "fecha_op": "1973-04-02",
+      "distancia_km": 25.29,
+      "tipo": "AEREA",
+      "km_aereo": 25.29,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 90,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83410": {
+      "inicio": "SKW",
+      "final": "CTY",
+      "fecha_op": "2020-06-07",
+      "distancia_km": 2.5,
+      "tipo": "AEREA",
+      "km_aereo": 2.5,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 28,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83440": {
+      "inicio": "GOR",
+      "final": "MCI",
+      "fecha_op": "1963-10-01",
+      "distancia_km": 5.2,
+      "tipo": "AEREA",
+      "km_aereo": 5.2,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 27,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83470": {
+      "inicio": "GOR",
+      "final": "MOE",
+      "fecha_op": null,
+      "distancia_km": null,
+      "tipo": null,
+      "km_aereo": null,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": null,
+      "conductor": null,
+      "material": null,
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93150": {
+      "inicio": "RUM",
+      "final": "HRA",
+      "fecha_op": "1963-08-04",
+      "distancia_km": 86,
+      "tipo": "AEREA",
+      "km_aereo": 86,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 195,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93160": {
+      "inicio": "RUM",
+      "final": "ROA",
+      "fecha_op": "1963-08-04",
+      "distancia_km": 26.7,
+      "tipo": "AEREA",
+      "km_aereo": 26.7,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 65,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93170": {
+      "inicio": "ROA",
+      "final": "CRO",
+      "fecha_op": "1985-07-01",
+      "distancia_km": 25,
+      "tipo": "AEREA",
+      "km_aereo": 25,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 108,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93180": {
+      "inicio": "ROA",
+      "final": "SIS ",
+      "fecha_op": "1963-08-04",
+      "distancia_km": 19.58,
+      "tipo": "AEREA",
+      "km_aereo": 19.58,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 59,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93190": {
+      "inicio": "CPT",
+      "final": "CSC",
+      "fecha_op": "1985-02-15",
+      "distancia_km": 16.3,
+      "tipo": "AEREA",
+      "km_aereo": 16.3,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 52,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93210": {
+      "inicio": "MXI",
+      "final": "STB",
+      "fecha_op": "1985-06-13",
+      "distancia_km": 6.24,
+      "tipo": "AEREA",
+      "km_aereo": 6.24,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 21,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93220": {
+      "inicio": "CPD",
+      "final": "CPT ",
+      "fecha_op": "1985-02-15",
+      "distancia_km": 2.74,
+      "tipo": "AEREA",
+      "km_aereo": 2.74,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 10,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93230": {
+      "inicio": "CTY",
+      "final": "APD",
+      "fecha_op": "1987-05-27",
+      "distancia_km": 5.24,
+      "tipo": "AEREA",
+      "km_aereo": 5.24,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 57,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93240": {
+      "inicio": "CPD",
+      "final": "CUC",
+      "fecha_op": "1985-02-07",
+      "distancia_km": 33.5,
+      "tipo": "AEREA",
+      "km_aereo": 33.5,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 140,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93250": {
+      "inicio": "MXI",
+      "final": "WIS",
+      "fecha_op": "1987-03-06",
+      "distancia_km": 6,
+      "tipo": "AEREA",
+      "km_aereo": 6,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 16,
+      "conductor": "DRAKE",
+      "material": "ACCC",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93260": {
+      "inicio": "CPT",
+      "final": "LMA",
+      "fecha_op": "2024-02-04",
+      "distancia_km": 18.8,
+      "tipo": "AEREA",
+      "km_aereo": 18.8,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 66,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93270": {
+      "inicio": "CSC",
+      "final": "MXI",
+      "fecha_op": "1993-05-03",
+      "distancia_km": 16.91,
+      "tipo": "AEREA",
+      "km_aereo": 16.91,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 62,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93280": {
+      "inicio": "HRA",
+      "final": "ROA ",
+      "fecha_op": "1993-03-09",
+      "distancia_km": 111.44,
+      "tipo": "AEREA",
+      "km_aereo": 111.44,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 253,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93290": {
+      "inicio": "MCI",
+      "final": "CTY",
+      "fecha_op": "2023-04-22",
+      "distancia_km": 15.6,
+      "tipo": "AEREA",
+      "km_aereo": 15.6,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 47,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93310": {
+      "inicio": "CPD",
+      "final": "SRY",
+      "fecha_op": "2012-03-20",
+      "distancia_km": 43.3,
+      "tipo": "AEREA",
+      "km_aereo": 43.3,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 105,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93320": {
+      "inicio": "TEK",
+      "final": "VPA",
+      "fecha_op": "1993-05-01",
+      "distancia_km": 9.21,
+      "tipo": "AEREA",
+      "km_aereo": 9.21,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 40,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93360": {
+      "inicio": "MXI",
+      "final": "XCO",
+      "fecha_op": "2014-01-01",
+      "distancia_km": 4,
+      "tipo": "AEREA",
+      "km_aereo": 4,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 14,
+      "conductor": "DRAKE",
+      "material": "ACCC",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93370": {
+      "inicio": "STB",
+      "final": "DWO",
+      "fecha_op": "1997-04-01",
+      "distancia_km": 2.53,
+      "tipo": "AEREA",
+      "km_aereo": 2.53,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 22,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93380": {
+      "inicio": "OZA",
+      "final": "CRO",
+      "fecha_op": "1998-08-11",
+      "distancia_km": 7.55,
+      "tipo": "AEREA",
+      "km_aereo": 7.55,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 65,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93390": {
+      "inicio": "OZA",
+      "final": "MIT",
+      "fecha_op": "1998-08-11",
+      "distancia_km": 0.9,
+      "tipo": "AEREA",
+      "km_aereo": 0.9,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 8,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93470": {
+      "inicio": "CPD",
+      "final": "CHQ",
+      "fecha_op": "2002-02-15",
+      "distancia_km": 22.9,
+      "tipo": "AEREA",
+      "km_aereo": 22.9,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 56,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93480": {
+      "inicio": "PID",
+      "final": "LRC",
+      "fecha_op": "2024-02-19",
+      "distancia_km": 2.12,
+      "tipo": "AEREA",
+      "km_aereo": 2.12,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 12,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93490": {
+      "inicio": "STB",
+      "final": "THO",
+      "fecha_op": "2001-03-26",
+      "distancia_km": 3.27,
+      "tipo": "AEREA",
+      "km_aereo": 3.27,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 25,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93550": {
+      "inicio": "ROA",
+      "final": "CNT ",
+      "fecha_op": "2004-08-03",
+      "distancia_km": 23.1,
+      "tipo": "AEREA",
+      "km_aereo": 23.1,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 86,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93570": {
+      "inicio": "CNT",
+      "final": "CUC",
+      "fecha_op": "2014-01-29",
+      "distancia_km": 5.75,
+      "tipo": "AEREA",
+      "km_aereo": 5.75,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 30,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93590": {
+      "inicio": "OZA",
+      "final": "WIS",
+      "fecha_op": "2005-06-17",
+      "distancia_km": 4.05,
+      "tipo": "AEREA",
+      "km_aereo": 4.05,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 16,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93620": {
+      "inicio": "XCO",
+      "final": "WIS",
+      "fecha_op": "2007-06-22",
+      "distancia_km": 3.85,
+      "tipo": "AEREA",
+      "km_aereo": 3.85,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 14,
+      "conductor": "DRAKE",
+      "material": "ACCC",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93640": {
+      "inicio": "LMA",
+      "final": "VPA",
+      "fecha_op": "2024-03-06",
+      "distancia_km": 2.6,
+      "tipo": "AEREA",
+      "km_aereo": 2.6,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 20,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93650": {
+      "inicio": "SRY",
+      "final": "PID",
+      "fecha_op": "2014-11-22",
+      "distancia_km": 15.81,
+      "tipo": "AEREA",
+      "km_aereo": 15.81,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 45,
+      "conductor": "BLUEJAY",
+      "material": "ACSR/AC",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93660": {
+      "inicio": "WIS ",
+      "final": "ROA",
+      "fecha_op": "2014-04-16",
+      "distancia_km": 21.44,
+      "tipo": "AEREA",
+      "km_aereo": 21.44,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 57,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93670": {
+      "inicio": "SIS",
+      "final": "WIS",
+      "fecha_op": "2015-11-17",
+      "distancia_km": 11.2,
+      "tipo": "AEREA",
+      "km_aereo": 11.12,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 48,
+      "conductor": "BLUEJAY",
+      "material": "ACSR/AC",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93690": {
+      "inicio": "ROA",
+      "final": "SIS",
+      "fecha_op": "2017-04-27",
+      "distancia_km": 14.8,
+      "tipo": "AEREA",
+      "km_aereo": 14.8,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 63,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93710": {
+      "inicio": "ROA",
+      "final": "SIS",
+      "fecha_op": "2017-04-28",
+      "distancia_km": 15.6,
+      "tipo": "AEREA",
+      "km_aereo": 15.6,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 65,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93720": {
+      "inicio": "MXI",
+      "final": "TEK",
+      "fecha_op": "2017-09-08",
+      "distancia_km": 11,
+      "tipo": "MIXTA",
+      "km_aereo": 10.2,
+      "km_subterraneo": 0.8,
+      "grt_dist": null,
+      "estructuras": 87,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93810": {
+      "inicio": "CHQ",
+      "final": "CIA",
+      "fecha_op": "2023-03-18",
+      "distancia_km": 37.98,
+      "tipo": "AEREA",
+      "km_aereo": 37.98,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 95,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93830": {
+      "inicio": "LMA",
+      "final": "STB",
+      "fecha_op": "2024-03-04",
+      "distancia_km": 17.5,
+      "tipo": "AEREA",
+      "km_aereo": 17.5,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 59,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93840": {
+      "inicio": "APD",
+      "final": "LMA",
+      "fecha_op": "2024-03-04",
+      "distancia_km": 20,
+      "tipo": "AEREA",
+      "km_aereo": 20,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 104,
+      "conductor": "CANARY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93850": {
+      "inicio": "MCI",
+      "final": "TEK",
+      "fecha_op": "2023-04-22",
+      "distancia_km": 11.1,
+      "tipo": "AEREA",
+      "km_aereo": 11.1,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 54,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93860": {
+      "inicio": "CUC",
+      "final": "WIS",
+      "fecha_op": "2024-04-22",
+      "distancia_km": 12.29,
+      "tipo": "AEREA",
+      "km_aereo": 12.29,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 50,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93870": {
+      "inicio": "CUC",
+      "final": "STB",
+      "fecha_op": "2024-04-22",
+      "distancia_km": 15.32,
+      "tipo": "AEREA",
+      "km_aereo": 15.32,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 64,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93920": {
+      "inicio": "CIA",
+      "final": "LRC",
+      "fecha_op": null,
+      "distancia_km": null,
+      "tipo": null,
+      "km_aereo": null,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": null,
+      "conductor": null,
+      "material": null,
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93940": {
+      "inicio": "LRC",
+      "final": "PID",
+      "fecha_op": null,
+      "distancia_km": null,
+      "tipo": null,
+      "km_aereo": null,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": null,
+      "conductor": null,
+      "material": null,
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "93970": {
+      "inicio": "RZC",
+      "final": "PID",
+      "fecha_op": null,
+      "distancia_km": null,
+      "tipo": null,
+      "km_aereo": null,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": null,
+      "conductor": null,
+      "material": null,
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "73A10": {
+      "inicio": "PPA",
+      "final": "SSA",
+      "fecha_op": "2010-07-01",
+      "distancia_km": 1,
+      "tipo": "AEREA",
+      "km_aereo": 0,
+      "km_subterraneo": 1,
+      "grt_dist": "DIST",
+      "estructuras": 0,
+      "conductor": null,
+      "material": null,
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "73A60": {
+      "inicio": "PPA",
+      "final": "MPP",
+      "fecha_op": "2023-01-15",
+      "distancia_km": 25.4,
+      "tipo": "MIXTA",
+      "km_aereo": 24.8,
+      "km_subterraneo": 0.6,
+      "grt_dist": "DIST",
+      "estructuras": 160,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "83120E": {
+      "inicio": "FEV",
+      "final": "-",
+      "fecha_op": "2009-01-09",
+      "distancia_km": 1.8,
+      "tipo": "AEREA",
+      "km_aereo": 0.9,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 10,
+      "conductor": "DRAKE",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "A3040": {
+      "inicio": "GSC",
+      "final": "CFV",
+      "fecha_op": "2024-06-11",
+      "distancia_km": 144.7,
+      "tipo": "AEREA",
+      "km_aereo": 144.7,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 399,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
+    },
+    "A3060": {
+      "inicio": "CUC",
+      "final": "GSC",
+      "fecha_op": "2024-04-22",
+      "distancia_km": 145.24,
+      "tipo": "AEREA",
+      "km_aereo": 145.24,
+      "km_subterraneo": null,
+      "grt_dist": null,
+      "estructuras": 350,
+      "conductor": "BLUEJAY",
+      "material": "ACSR",
+      "fuente": "Subestaciones_con_colaterales_ultimo / LINEAS",
+      "torres": []
     }
-  ],
-  "unifilares": [
-    { "nombre": "SE Agrícola Sonoyta", "kv": "115kV", "codigo": "AGS" },
-    { "nombre": "SE Carranza", "kv": "161kV", "codigo": "CAR" },
-    { "nombre": "SE Centenario", "kv": "230kV", "codigo": "CEN" },
-    { "nombre": "SE Río Nuevo", "kv": "161kV", "codigo": "RON" },
-    { "nombre": "SE Cucapah", "kv": "230kV", "codigo": "CUC" }
-  ]
+  }
 }

@@ -1157,7 +1157,7 @@ function mapV3ToApp(json) {
   const subsArr = Object.entries(json.subestaciones).map(([code, s]) => ({
     codigo: code,
     nombre: s.nombre || code,
-    voltajes: s.voltajes || '—',
+    voltajes: (s.voltajes != null) ? String(s.voltajes) : '—',
     proceso: s.proceso || '—',
     tipo: s.tipo || '—',
     arreglo: s.arreglo || '—',

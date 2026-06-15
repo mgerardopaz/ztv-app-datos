@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZTV — Zona Transmisión Valle</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0d0f;
+    --bg2: #0f1418;
+    --bg3: #141a1f;
+    --panel: #111820;
+    --border: #1e2d35;
+    --green: #00c8a0;
+    --green-dim: #00c8a020;
+    --green-mid: #00c8a060;
+    --amber: #f5a623;
+    --red: #ff4444;
+    --text: #c8d8e0;
+    --text-dim: #607080;
+    --text-bright: #e8f4f8;
+    --mono: 'Share Tech Mono', monospace;
+    --ui: 'Rajdhani', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--ui);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 52px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header-title {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--green);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+
+  .header-title span {
+    display: block;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .header-status {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .status-dot.offline { background: var(--text-dim); box-shadow: none; animation: none; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* UPDATE BUTTON */
+  .update-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 5px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 10px;
+    transition: all 0.2s;
+  }
+
+  .update-btn:hover { border-color: var(--green); color: var(--green); }
+  .update-btn.loading svg { animation: spin 0.8s linear infinite; }
+  .update-btn:disabled { opacity: 0.5; cursor: default; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* UPDATE BANNER */
+  .update-banner {
+    display: none;
+    padding: 8px 16px;
+    background: var(--green-dim);
+    border-bottom: 1px solid var(--green-mid);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    text-align: center;
+  }
+
+  .update-banner.show { display: block; animation: fadeIn 0.3s ease; }
+
+  .update-banner.error {
+    background: rgba(255,68,68,0.1);
+    border-bottom-color: rgba(255,68,68,0.4);
+    color: var(--red);
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 52px;
+    z-index: 99;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 10px 4px;
+    text-align: center;
+    font-family: var(--ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .tab svg { opacity: 0.5; transition: opacity 0.2s; }
+
+  .tab.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+
+  .tab.active svg { opacity: 1; }
+
+  .tab:hover { color: var(--text-bright); }
+
+  /* CONTENT */
+  .content { display: none; animation: fadeIn 0.2s ease; }
+  .content.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SEARCH BAR */
+  .search-wrap {
+    padding: 12px 16px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 96px;
+    z-index: 98;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px 8px 36px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-bright);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus { border-color: var(--green-mid); }
+  .search-input::placeholder { color: var(--text-dim); }
+
+  .search-wrap { position: relative; }
+  .search-icon {
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    pointer-events: none;
+  }
+
+  /* LIST */
+  .list { padding-bottom: 80px; }
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    gap: 14px;
+  }
+
+  .list-item:hover, .list-item.selected {
+    background: var(--green-dim);
+  }
+
+  .list-item.selected {
+    border-left: 2px solid var(--green);
+  }
+
+  .item-code {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--green);
+    min-width: 50px;
+    letter-spacing: 0.05em;
+  }
+
+  .item-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+    flex: 1;
+  }
+
+  .item-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2px 6px;
+  }
+
+  .item-arrow {
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  /* DETAIL PANEL */
+  .detail-panel {
+    display: none;
+    background: var(--bg);
+    min-height: calc(100vh - 96px);
+    animation: slideIn 0.2s ease;
+  }
+
+  .detail-panel.active { display: block; }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .detail-header {
+    background: var(--bg2);
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 96px;
+    z-index: 97;
+  }
+
+  .back-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  .detail-title {
+    font-family: var(--mono);
+    font-size: 16px;
+    color: var(--green);
+  }
+
+  .detail-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-left: auto;
+  }
+
+  .detail-body { padding: 16px; }
+
+  .detail-section {
+    margin-bottom: 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .detail-section-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    padding: 8px 14px;
+    background: var(--green-dim);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .detail-row {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
+  .detail-row:nth-child(2n) { border-right: none; }
+  .detail-row:last-child, .detail-row:nth-last-child(2) { border-bottom: none; }
+
+  .detail-row.full {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+
+  .detail-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+  }
+
+  .detail-value {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text-bright);
+  }
+
+  .detail-value.green { color: var(--green); }
+  .detail-value.amber { color: var(--amber); }
+
+  /* MVA bar */
+  .mva-bar-wrap { margin-top: 6px; }
+  .mva-bar-bg {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .mva-bar-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+
+  /* LINES associated */
+  .assoc-line {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+  }
+  .assoc-line:last-child { border-bottom: none; }
+
+  .assoc-code {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--green);
+    min-width: 60px;
+  }
+
+  .assoc-info { flex: 1; font-size: 13px; color: var(--text-dim); }
+
+  /* MAPS button */
+  .maps-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--green-dim);
+    border: 1px solid var(--green-mid);
+    color: var(--green);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-family: var(--ui);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 20px;
+    text-decoration: none;
+  }
+
+  .maps-btn:hover {
+    background: #00c8a030;
+    border-color: var(--green);
+    box-shadow: 0 0 12px var(--green-dim);
+  }
+
+  /* DISPARO LOCATOR */
+  .locator-section {
+    background: var(--panel);
+    border: 1px solid var(--green-mid);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .locator-header {
+    background: var(--green-dim);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .locator-header-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    flex: 1;
+  }
+
+  .locator-body { padding: 14px; }
+
+  .locator-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .locator-select, .locator-input {
+    flex: 1;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-bright);
+    outline: none;
+  }
+
+  .locator-select:focus, .locator-input:focus { border-color: var(--green-mid); }
+
+  .locator-btn {
+    width: 100%;
+    background: var(--green);
+    color: #06140f;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    font-family: var(--ui);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .locator-btn:hover { background: #00e0b4; box-shadow: 0 0 14px var(--green-dim); }
+
+  .locator-result {
+    margin-top: 14px;
+    padding: 14px;
+    background: var(--bg2);
+    border: 1px solid var(--green-mid);
+    border-radius: 4px;
+    display: none;
+  }
+
+  .locator-result.show { display: block; }
+
+  .locator-result-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+
+  .locator-tower-pair {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .locator-tower-card {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .locator-tower-card.nearest {
+    border-color: var(--green);
+    box-shadow: 0 0 10px var(--green-dim);
+  }
+
+  .locator-tower-num {
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .locator-tower-tipo {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 4px 0 8px;
+  }
+
+  .locator-tower-dist {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+
+  /* PERSONNEL */
+  .personnel-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+  }
+  .personnel-item:last-child { border-bottom: none; }
+
+  .personnel-info { flex: 1; }
+  .personnel-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+  .personnel-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .dc3-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    border-radius: 2px;
+    padding: 3px 8px;
+    text-align: center;
+    min-width: 32px;
+  }
+  .dc3-badge.ok { color: var(--green); background: var(--green-dim); border: 1px solid var(--green-mid); }
+  .dc3-badge.na { color: var(--amber); background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.3); }
+  .dc3-badge.pending { color: var(--text-dim); background: var(--panel); border: 1px solid var(--border); }
+  .tower-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+  }
+  .tower-item:last-child { border-bottom: none; }
+
+  .tower-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    min-width: 32px;
+  }
+
+  .tower-name {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-bright);
+    flex: 1;
+  }
+
+  .tower-map-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .tower-map-btn:hover {
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  /* UNIFILARES */
+  .unifilar-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    gap: 14px;
+    transition: background 0.15s;
+  }
+
+  .unifilar-item:hover { background: var(--green-dim); }
+
+  .unifilar-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    font-size: 16px;
+  }
+
+  .unifilar-name {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+
+  .unifilar-kv {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--amber);
+    background: rgba(245,166,35,0.1);
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 2px;
+    padding: 2px 6px;
+  }
+
+  /* SVG Viewer */
+  .svg-viewer {
+    background: #000;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .svg-viewer-header {
+    background: var(--panel);
+    padding: 8px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .svg-container {
+    overflow: auto;
+    padding: 16px;
+    max-height: 500px;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 16px 16px 8px;
+  }
+
+  /* COUNT BADGE */
+  .count-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2px 8px;
+    margin-left: 6px;
+  }
+
+  /* No results */
+  .no-results {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+
+  /* LOAD CSV button */
+  .load-csv-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 16px;
+    padding: 12px;
+    background: var(--panel);
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .load-csv-btn:hover {
+    border-color: var(--green-mid);
+    color: var(--green);
+  }
+
+  input[type=file] { display: none; }
+
+  /* Responsive */
+  @media (min-width: 600px) {
+    .detail-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">
+    <svg class="logo-icon" viewBox="0 0 28 28" fill="none">
+      <rect x="1" y="1" width="26" height="26" rx="3" stroke="#00c8a0" stroke-width="1"/>
+      <line x1="14" y1="1" x2="14" y2="9" stroke="#00c8a0" stroke-width="1.5"/>
+      <line x1="14" y1="19" x2="14" y2="27" stroke="#00c8a0" stroke-width="1.5"/>
+      <line x1="1" y1="14" x2="9" y2="14" stroke="#00c8a0" stroke-width="1.5"/>
+      <line x1="19" y1="14" x2="27" y2="14" stroke="#00c8a0" stroke-width="1.5"/>
+      <circle cx="14" cy="14" r="4" stroke="#00c8a0" stroke-width="1.5"/>
+      <circle cx="14" cy="14" r="1.5" fill="#00c8a0"/>
+    </svg>
+    <div class="header-title">
+      ZTV
+      <span>Zona Transmisión Valle · CFE</span>
+    </div>
+  </div>
+  <div class="header-status">
+    <button class="update-btn" id="update-btn" onclick="actualizarDatos()">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+        <path d="M9.5 5.5a4 4 0 1 1-1.2-2.85M9.5 1.5v3h-3" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span id="update-label">Actualizar</span>
+    </button>
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text">LOCAL</span>
+  </div>
+</div>
+
+<!-- UPDATE BANNER -->
+<div class="update-banner" id="update-banner"></div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="showTab('sub')">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <rect x="2" y="8" width="12" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/>
+      <rect x="5" y="4" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/>
+      <line x1="8" y1="2" x2="8" y2="4" stroke="currentColor" stroke-width="1.2"/>
+      <line x1="6" y1="2" x2="10" y2="2" stroke="currentColor" stroke-width="1.2"/>
+    </svg>
+    Subestaciones
+  </div>
+  <div class="tab" onclick="showTab('lin')">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M5 5 L8 2 L11 5" stroke="currentColor" stroke-width="1.2" fill="none"/>
+      <path d="M5 11 L8 14 L11 11" stroke="currentColor" stroke-width="1.2" fill="none"/>
+      <circle cx="2" cy="8" r="1.5" fill="currentColor"/>
+      <circle cx="14" cy="8" r="1.5" fill="currentColor"/>
+    </svg>
+    Líneas
+  </div>
+  <div class="tab" onclick="showTab('uni')">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <rect x="2" y="3" width="12" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/>
+      <line x1="5" y1="7" x2="11" y2="7" stroke="currentColor" stroke-width="1"/>
+      <line x1="5" y1="9.5" x2="9" y2="9.5" stroke="currentColor" stroke-width="1"/>
+    </svg>
+    Unifilares
+  </div>
+</div>
+
+<!-- ==================== SUBESTACIONES ==================== -->
+<div class="content active" id="tab-sub">
+  <div class="search-wrap">
+    <span class="search-icon">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="5.5" cy="5.5" r="4" stroke="#607080" stroke-width="1.5"/>
+        <line x1="9" y1="9" x2="13" y2="13" stroke="#607080" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <input class="search-input" id="sub-search" type="text" placeholder="Buscar subestación..." oninput="filterSubs()">
+  </div>
+
+  <!-- List view -->
+  <div id="sub-list-view">
+    <div class="section-label">Subestaciones <span class="count-badge" id="sub-count">8</span></div>
+    <div class="load-csv-btn" onclick="document.getElementById('csv-sub').click()">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M7 1v8M4 6l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M2 10v2h10v-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Cargar CSV de subestaciones
+    </div>
+    <input type="file" id="csv-sub" accept=".csv" onchange="loadCSV('sub', this)">
+    <div class="list" id="sub-list"></div>
+  </div>
+
+  <!-- Detail view -->
+  <div id="sub-detail" class="detail-panel">
+    <div class="detail-header">
+      <button class="back-btn" onclick="closeDetail('sub')">← Volver</button>
+      <div class="detail-title" id="sub-detail-code">AGS</div>
+      <div class="detail-subtitle" id="sub-detail-name">Agrícola Sonoyta</div>
+    </div>
+    <div class="detail-body" id="sub-detail-body"></div>
+  </div>
+</div>
+
+<!-- ==================== LÍNEAS ==================== -->
+<div class="content" id="tab-lin">
+  <div class="search-wrap">
+    <span class="search-icon">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="5.5" cy="5.5" r="4" stroke="#607080" stroke-width="1.5"/>
+        <line x1="9" y1="9" x2="13" y2="13" stroke="#607080" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <input class="search-input" id="lin-search" type="text" placeholder="Buscar línea..." oninput="filterLines()">
+  </div>
+
+  <div id="lin-list-view">
+    <div class="section-label">Líneas de Transmisión <span class="count-badge" id="lin-count">4</span></div>
+    <div class="load-csv-btn" onclick="document.getElementById('csv-lin').click()">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M7 1v8M4 6l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M2 10v2h10v-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Cargar CSV de líneas
+    </div>
+    <input type="file" id="csv-lin" accept=".csv" onchange="loadCSV('lin', this)">
+    <div class="list" id="lin-list"></div>
+  </div>
+
+  <div id="lin-detail" class="detail-panel">
+    <div class="detail-header">
+      <button class="back-btn" onclick="closeDetail('lin')">← Volver</button>
+      <div class="detail-title" id="lin-detail-code">A3060</div>
+      <div class="detail-subtitle" id="lin-detail-kv">230 kV</div>
+    </div>
+    <div class="detail-body" id="lin-detail-body"></div>
+  </div>
+</div>
+
+<!-- ==================== UNIFILARES ==================== -->
+<div class="content" id="tab-uni">
+  <div id="uni-list-view">
+    <div class="section-label">Unifilares disponibles <span class="count-badge">5</span></div>
+    <div class="list" id="uni-list"></div>
+  </div>
+
+  <div id="uni-detail" class="detail-panel">
+    <div class="detail-header">
+      <button class="back-btn" onclick="closeDetail('uni')">← Volver</button>
+      <div class="detail-title" id="uni-detail-name">SE Centenario</div>
+      <div class="detail-subtitle" id="uni-detail-kv">230 kV</div>
+    </div>
+    <div class="detail-body" id="uni-detail-body"></div>
+  </div>
+</div>
+
+<script>
+// ===== CONFIG =====
+// Raw URL del JSON en GitHub (rama, owner/repo y archivo)
+const DATA_URL = 'https://raw.githubusercontent.com/mgerardopaz/ztv-app-datos/main/ztvalle_datos.json';
+const STORAGE_KEY = 'ztv_datos_v3';
+
+// ===== DATA (fallback inicial / mock) =====
+let SUBESTACIONES = [
+  {
+    codigo: 'AGS', nombre: 'Agrícola Sonoyta',
+    voltajes: '115kV / 34.5kV', proceso: 'SUBTRANSMISIÓN', tipo: 'CONV.',
+    arreglo: 'B. SENCLL', mva_op: 0, mva_res: 0, mvar_reac_op: 0, mvar_reac_res: 0,
+    mvar_cap_op: 0, mvar_cap_res: 0, municipio: 'P. ELÍAS CALLES', clase: 'A',
+    fecha: 'ENE-1986', lat: 30.5957, lon: -113.2147,
+    lineas: [{ code: '73080', colateral: 'SNY' }],
+    personal: [
+      { nombre: 'Juan Pérez López', rpe: 'RPE-04521', especialidad: 'Operador SE', dc3: 'ok' },
+      { nombre: 'Marco Hernández Ruiz', rpe: 'RPE-04588', especialidad: 'Técnico Protecciones', dc3: 'na' },
+      { nombre: 'Luis Ramírez Cota', rpe: 'RPE-04602', especialidad: 'Liniero', dc3: 'pending' }
+    ]
+  },
+  {
+    codigo: 'APD', nombre: 'Aeropuerto Dos',
+    voltajes: '230kV / 115kV', proceso: 'TRANSMISIÓN', tipo: 'CONV.',
+    arreglo: 'DOBLE BARRA', mva_op: 450, mva_res: 100, mvar_reac_op: 45, mvar_reac_res: 10,
+    mvar_cap_op: 30, mvar_cap_res: 8, municipio: 'MEXICALI', clase: 'A',
+    fecha: 'MAR-1995', lat: 32.6236, lon: -115.2417,
+    lineas: [{ code: 'A3060', colateral: 'CUC' }, { code: 'A3040', colateral: 'GSC' }]
+  },
+  {
+    codigo: 'CFP', nombre: 'Ctral Fotovoltaica Peñasco',
+    voltajes: '115kV / 34.5kV', proceso: 'GENERACIÓN', tipo: 'GDR',
+    arreglo: 'BARRA SENC', mva_op: 120, mva_res: 20, mvar_reac_op: 0, mvar_reac_res: 0,
+    mvar_cap_op: 0, mvar_cap_res: 0, municipio: 'PTO. PEÑASCO', clase: 'B',
+    fecha: 'JUL-2018', lat: 31.3236, lon: -113.5533,
+    lineas: [{ code: '73080', colateral: 'AGS' }]
+  },
+  {
+    codigo: 'CHQ', nombre: 'Chapultepec',
+    voltajes: '230kV / 115kV', proceso: 'TRANSMISIÓN', tipo: 'CONV.',
+    arreglo: 'DOBLE BARRA', mva_op: 600, mva_res: 150, mvar_reac_op: 60, mvar_reac_res: 15,
+    mvar_cap_op: 0, mvar_cap_res: 0, municipio: 'MEXICALI', clase: 'A',
+    fecha: 'FEB-1980', lat: 32.6637, lon: -115.4710,
+    lineas: [{ code: 'A3040', colateral: 'GSC' }, { code: '73A60', colateral: 'CUC' }]
+  },
+  {
+    codigo: 'CUC', nombre: 'Cucapah',
+    voltajes: '230kV / 115kV', proceso: 'TRANSMISIÓN', tipo: 'CONV.',
+    arreglo: 'INTERRUPTOR Y MEDIO', mva_op: 900, mva_res: 200, mvar_reac_op: 90, mvar_reac_res: 20,
+    mvar_cap_op: 60, mvar_cap_res: 15, municipio: 'MEXICALI', clase: 'A',
+    fecha: 'JUN-1975', lat: 32.5947, lon: -115.3782,
+    lineas: [{ code: 'A3060', colateral: 'GSC' }, { code: '73A60', colateral: 'CHQ' }, { code: '73A10', colateral: 'ROA' }]
+  },
+  {
+    codigo: 'GSC', nombre: 'Gasca',
+    voltajes: '230kV / 115kV', proceso: 'TRANSMISIÓN', tipo: 'CONV.',
+    arreglo: 'DOBLE BARRA', mva_op: 750, mva_res: 180, mvar_reac_op: 75, mvar_reac_res: 18,
+    mvar_cap_op: 45, mvar_cap_res: 10, municipio: 'MEXICALI', clase: 'A',
+    fecha: 'AGO-1988', lat: 32.4891, lon: -115.1234,
+    lineas: [{ code: 'A3060', colateral: 'CUC' }, { code: 'A3040', colateral: 'CHQ' }]
+  },
+  {
+    codigo: 'ROA', nombre: 'Río Algodones',
+    voltajes: '115kV / 34.5kV', proceso: 'SUBTRANSMISIÓN', tipo: 'CONV.',
+    arreglo: 'B. SENCLL', mva_op: 80, mva_res: 20, mvar_reac_op: 0, mvar_reac_res: 0,
+    mvar_cap_op: 0, mvar_cap_res: 0, municipio: 'SAN LUIS R.C.', clase: 'B',
+    fecha: 'NOV-1993', lat: 32.1123, lon: -114.7234,
+    lineas: [{ code: '73A10', colateral: 'CUC' }]
+  },
+  {
+    codigo: 'SNY', nombre: 'Sonoyta',
+    voltajes: '115kV / 34.5kV', proceso: 'SUBTRANSMISIÓN', tipo: 'CONV.',
+    arreglo: 'B. SENCLL', mva_op: 60, mva_res: 15, mvar_reac_op: 0, mvar_reac_res: 0,
+    mvar_cap_op: 0, mvar_cap_res: 0, municipio: 'PLUTARCO E. CALLES', clase: 'B',
+    fecha: 'MAY-1990', lat: 31.8687, lon: -112.8509,
+    lineas: [{ code: '73080', colateral: 'AGS' }]
+  }
+];
+
+let LINEAS = [
+  {
+    code: 'A3060', kv: '230kV',
+    inicio: 'CUC', fin: 'GSC', distancia: '145.24',
+    conductor: 'BLUEJAY', material: 'ACSR', estructuras: 350,
+    torres: [
+      { num: 1, lat: 32.5947, lon: -115.3782, label: 'EST-001 · Torre inicio CUC', tipo: 'REMATE' },
+      { num: 2, lat: 32.5938, lon: -115.3705, label: 'EST-002', tipo: 'SUSPENSIÓN' },
+      { num: 3, lat: 32.5926, lon: -115.3622, label: 'EST-003', tipo: 'SUSPENSIÓN' },
+      { num: 4, lat: 32.5915, lon: -115.3540, label: 'EST-004', tipo: 'SUSPENSIÓN' },
+      { num: 5, lat: 32.5901, lon: -115.3458, label: 'EST-005', tipo: 'REMATE DEFLEXIÓN' },
+      { num: 6, lat: 32.5884, lon: -115.3378, label: 'EST-006', tipo: 'SUSPENSIÓN' },
+      { num: 7, lat: 32.5870, lon: -115.3296, label: 'EST-007', tipo: 'SUSPENSIÓN' },
+      { num: 8, lat: 32.5855, lon: -115.3215, label: 'EST-008', tipo: 'SUSPENSIÓN' },
+      { num: 9, lat: 32.5840, lon: -115.3134, label: 'EST-009', tipo: 'REMATE' },
+      { num: 10, lat: 32.5822, lon: -115.3055, label: 'EST-010', tipo: 'SUSPENSIÓN' },
+      { num: 50, lat: 32.5600, lon: -115.3200, label: 'EST-050', tipo: 'SUSPENSIÓN' },
+      { num: 100, lat: 32.5300, lon: -115.2800, label: 'EST-100', tipo: 'REMATE' },
+      { num: 200, lat: 32.5100, lon: -115.2200, label: 'EST-200', tipo: 'SUSPENSIÓN' },
+      { num: 300, lat: 32.4980, lon: -115.1600, label: 'EST-300', tipo: 'SUSPENSIÓN' },
+      { num: 350, lat: 32.4891, lon: -115.1234, label: 'EST-350 · Torre fin GSC', tipo: 'REMATE' },
+    ]
+  },
+  {
+    code: 'A3040', kv: '230kV',
+    inicio: 'CHQ', fin: 'GSC', distancia: '98.17',
+    conductor: 'CARDINAL', material: 'ACSR', estructuras: 248,
+    torres: [
+      { num: 1, lat: 32.6637, lon: -115.4710, label: 'EST-001 · Torre inicio CHQ' },
+      { num: 100, lat: 32.5800, lon: -115.3500, label: 'EST-100' },
+      { num: 248, lat: 32.4891, lon: -115.1234, label: 'EST-248 · Torre fin GSC' },
+    ]
+  },
+  {
+    code: '73A60', kv: '115kV',
+    inicio: 'CUC', fin: 'CHQ', distancia: '22.50',
+    conductor: 'HAWK', material: 'ACSR', estructuras: 68,
+    torres: [
+      { num: 1, lat: 32.5947, lon: -115.3782, label: 'EST-001 · Torre inicio CUC' },
+      { num: 34, lat: 32.6291, lon: -115.4246, label: 'EST-034' },
+      { num: 68, lat: 32.6637, lon: -115.4710, label: 'EST-068 · Torre fin CHQ' },
+    ]
+  },
+  {
+    code: '73A10', kv: '115kV',
+    inicio: 'CUC', fin: 'ROA', distancia: '67.80',
+    conductor: 'HAWK', material: 'ACSR', estructuras: 190,
+    torres: [
+      { num: 1, lat: 32.5947, lon: -115.3782, label: 'EST-001 · Torre inicio CUC' },
+      { num: 95, lat: 32.3535, lon: -115.0508, label: 'EST-095' },
+      { num: 190, lat: 32.1123, lon: -114.7234, label: 'EST-190 · Torre fin ROA' },
+    ]
+  }
+];
+
+const UNIFILARES = [
+  { nombre: 'SE Agrícola Sonoyta', kv: '115kV', codigo: 'AGS' },
+  { nombre: 'SE Carranza', kv: '161kV', codigo: 'CAR' },
+  { nombre: 'SE Centenario', kv: '230kV', codigo: 'CEN' },
+  { nombre: 'SE Río Nuevo', kv: '161kV', codigo: 'RON' },
+  { nombre: 'SE Cucapah', kv: '230kV', codigo: 'CUC' },
+];
+
+// ===== STATE =====
+let currentSub = null;
+let currentLin = null;
+let currentUni = null;
+let dataSource = 'mock'; // 'mock' | 'local' | 'remote'
+let dataGeneradoFecha = null;
+
+// ===== MAPEO v3 -> ESTRUCTURA INTERNA =====
+// Convierte el JSON v3 (subestaciones {} + lineas {}) en los arrays
+// SUBESTACIONES / LINEAS que usa el resto de la app.
+
+// Estima kV por convención de nomenclatura CFE cuando el dato no viene explícito.
+function estimarKV(code) {
+  const c = String(code).toUpperCase();
+  if (c.startsWith('A')) return '230kV';      // A30xx -> 230kV
+  if (c.startsWith('6')) return '69kV';
+  if (c.startsWith('7')) return '115kV';
+  if (c.startsWith('8')) return '161kV';
+  if (c.startsWith('9')) return '230kV';
+  return '—';
+}
+
+function mapV3ToApp(json) {
+  if (!json || typeof json !== 'object') throw new Error('JSON vacío o inválido');
+  if (!json.subestaciones || !json.lineas) throw new Error('Estructura inesperada: faltan "subestaciones" o "lineas"');
+
+  const lineasMap = json.lineas;
+
+  // --- Lineas ---
+  const lineasArr = Object.entries(lineasMap).map(([code, l]) => ({
+    code: code,
+    kv: estimarKV(code),
+    kv_estimado: true,
+    inicio: l.inicio || '—',
+    fin: l.final || '—',
+    distancia: (l.distancia_km != null) ? String(l.distancia_km) : '—',
+    conductor: l.conductor || '—',
+    material: l.material || '—',
+    estructuras: (l.estructuras != null) ? l.estructuras : '—',
+    fecha_op: l.fecha_op || null,
+    tipo_construccion: l.tipo || null,
+    km_aereo: l.km_aereo,
+    km_subterraneo: l.km_subterraneo,
+    comentario: l.comentario || null,
+    torres: Array.isArray(l.torres) ? l.torres : []
+  }));
+
+  // --- Subestaciones ---
+  const subsArr = Object.entries(json.subestaciones).map(([code, s]) => ({
+    codigo: code,
+    nombre: s.nombre || code,
+    voltajes: s.voltajes || '—',
+    proceso: s.proceso || '—',
+    tipo: s.tipo || '—',
+    arreglo: s.arreglo || '—',
+    mva_op: numOrZero(s.mva_op),
+    mva_res: numOrZero(s.mva_res),
+    mvar_reac_op: numOrZero(s.mvar_reac_op),
+    mvar_reac_res: numOrZero(s.mvar_reac_res),
+    mvar_cap_op: numOrZero(s.mvar_cap_op),
+    mvar_cap_res: numOrZero(s.mvar_cap_res),
+    municipio: s.municipio || '—',
+    clase: s.clase || '—',
+    fecha: s.pserv || '—',
+    lat: null, // pendiente: vendrá de KMZ
+    lon: null,
+    lineas: Array.isArray(s.lineas) ? s.lineas.filter(l => l.code && l.colateral) : [],
+    lineas_completo: !!s.lineas_completo,
+    personal: null // pendiente: archivo de personal/RPE/DC3
+  }));
+
+  return { subsArr, lineasArr };
+}
+
+function numOrZero(v) {
+  return (typeof v === 'number') ? v : 0;
+}
+
+// ===== ACTUALIZAR DATOS =====
+function setStatus(text, online) {
+  document.getElementById('status-text').textContent = text;
+  const dot = document.getElementById('status-dot');
+  dot.classList.toggle('offline', !online);
+}
+
+function showBanner(msg, isError) {
+  const b = document.getElementById('update-banner');
+  b.textContent = msg;
+  b.classList.remove('show', 'error');
+  if (isError) b.classList.add('error');
+  b.classList.add('show');
+  clearTimeout(window._bannerTimeout);
+  window._bannerTimeout = setTimeout(() => b.classList.remove('show'), 5000);
+}
+
+function aplicarDatos(json, origen) {
+  const { subsArr, lineasArr } = mapV3ToApp(json);
+  SUBESTACIONES = subsArr;
+  LINEAS = lineasArr;
+  dataSource = origen;
+  dataGeneradoFecha = json.generado || null;
+
+  // Re-render todo, cerrando cualquier detalle abierto
+  currentSub = null; currentLin = null;
+  document.getElementById('sub-detail').classList.remove('active');
+  document.getElementById('lin-detail').classList.remove('active');
+  document.getElementById('sub-list-view').style.display = 'block';
+  document.getElementById('lin-list-view').style.display = 'block';
+  document.querySelector('#tab-sub .search-wrap').style.display = '';
+  document.querySelector('#tab-lin .search-wrap').style.display = '';
+
+  renderSubList(SUBESTACIONES);
+  renderLinList(LINEAS);
+
+  const fechaTxt = dataGeneradoFecha ? ` (datos: ${dataGeneradoFecha})` : '';
+  if (origen === 'remote') {
+    setStatus('ACTUALIZADO' + fechaTxt, true);
+  } else if (origen === 'local') {
+    setStatus('LOCAL' + fechaTxt, false);
+  } else {
+    setStatus('LOCAL (demo)', false);
+  }
+}
+
+async function actualizarDatos() {
+  const btn = document.getElementById('update-btn');
+  const label = document.getElementById('update-label');
+  btn.disabled = true;
+  btn.classList.add('loading');
+  const labelPrevio = label.textContent;
+  label.textContent = 'Actualizando...';
+
+  try {
+    const resp = await fetch(DATA_URL, { cache: 'no-store' });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const json = await resp.json();
+
+    aplicarDatos(json, 'remote');
+
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(json));
+      localStorage.setItem(STORAGE_KEY + '_fecha', new Date().toISOString());
+    } catch (e) { /* almacenamiento no disponible, no es crítico */ }
+
+    const n_subs = json.subestaciones ? Object.keys(json.subestaciones).length : 0;
+    const n_lin = json.lineas ? Object.keys(json.lineas).length : 0;
+    showBanner(`Datos actualizados: ${n_subs} subestaciones, ${n_lin} líneas (v${json.version || '?'})`, false);
+  } catch (err) {
+    showBanner('No se pudo actualizar: ' + err.message + '. Usando datos locales.', true);
+    setStatus('SIN CONEXIÓN', false);
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    label.textContent = labelPrevio;
+  }
+}
+
+// ===== CARGA INICIAL: intenta usar lo último guardado en localStorage =====
+function cargarDatosLocales() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const json = JSON.parse(raw);
+    aplicarDatos(json, 'local');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+
+// ===== TABS =====
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// ===== RENDER LISTS =====
+function renderSubList(items) {
+  const list = document.getElementById('sub-list');
+  document.getElementById('sub-count').textContent = items.length;
+  if (!items.length) {
+    list.innerHTML = '<div class="no-results">— Sin resultados —</div>';
+    return;
+  }
+  list.innerHTML = items.map(s => `
+    <div class="list-item ${currentSub === s.codigo ? 'selected' : ''}" onclick="openSub('${s.codigo}')">
+      <div class="item-code">${s.codigo}</div>
+      <div class="item-name">${s.nombre}</div>
+      <div class="item-badge">${s.voltajes.split('/')[0].trim()}</div>
+      <div class="item-arrow">›</div>
+    </div>
+  `).join('');
+}
+
+function renderLinList(items) {
+  const list = document.getElementById('lin-list');
+  document.getElementById('lin-count').textContent = items.length;
+  if (!items.length) {
+    list.innerHTML = '<div class="no-results">— Sin resultados —</div>';
+    return;
+  }
+  list.innerHTML = items.map(l => `
+    <div class="list-item ${currentLin === l.code ? 'selected' : ''}" onclick="openLin('${l.code}')">
+      <div class="item-code">${l.code}</div>
+      <div class="item-name">${l.inicio} → ${l.fin}</div>
+      <div class="item-badge">${l.kv}</div>
+      <div class="item-arrow">›</div>
+    </div>
+  `).join('');
+}
+
+function renderUniList() {
+  const list = document.getElementById('uni-list');
+  list.innerHTML = UNIFILARES.map(u => `
+    <div class="unifilar-item" onclick="openUni('${u.codigo}')">
+      <div class="unifilar-icon">⚡</div>
+      <div class="unifilar-name">${u.nombre}</div>
+      <div class="unifilar-kv">${u.kv}</div>
+      <div class="item-arrow">›</div>
+    </div>
+  `).join('');
+}
+
+// ===== FILTER =====
+function filterSubs() {
+  const q = document.getElementById('sub-search').value.toLowerCase();
+  renderSubList(SUBESTACIONES.filter(s =>
+    s.codigo.toLowerCase().includes(q) || s.nombre.toLowerCase().includes(q)
+  ));
+}
+
+function filterLines() {
+  const q = document.getElementById('lin-search').value.toLowerCase();
+  renderLinList(LINEAS.filter(l =>
+    l.code.toLowerCase().includes(q) || l.inicio.toLowerCase().includes(q) || l.fin.toLowerCase().includes(q)
+  ));
+}
+
+// ===== DETAIL: SUB =====
+function openSub(codigo) {
+  const s = SUBESTACIONES.find(x => x.codigo === codigo);
+  if (!s) return;
+  currentSub = codigo;
+  document.getElementById('sub-detail-code').textContent = s.codigo;
+  document.getElementById('sub-detail-name').textContent = s.nombre;
+
+  const maxMVA = s.mva_op + s.mva_res || 1;
+  const pct = Math.round((s.mva_op / maxMVA) * 100);
+
+  document.getElementById('sub-detail-body').innerHTML = `
+    ${(s.lat != null && s.lon != null) ? `
+    <a class="maps-btn" href="https://maps.google.com/?q=${s.lat},${s.lon}" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 1C5.24 1 3 3.24 3 6c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5z" stroke="currentColor" stroke-width="1.3" fill="none"/>
+        <circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.3"/>
+      </svg>
+      Abrir ubicación en Maps
+    </a>
+    ` : `
+    <div class="detail-section" style="padding:10px 14px;font-family:var(--mono);font-size:11px;color:var(--text-dim)">
+      Ubicación pendiente (se llenará al procesar KMZ)
+    </div>
+    `}
+
+    <div class="detail-section">
+      <div class="detail-section-title">Características Generales</div>
+      <div class="detail-grid">
+        <div class="detail-row">
+          <div class="detail-label">Clave SE</div>
+          <div class="detail-value green">${s.codigo}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Voltajes</div>
+          <div class="detail-value">${s.voltajes}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Proceso</div>
+          <div class="detail-value">${s.proceso}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Tipo</div>
+          <div class="detail-value">${s.tipo}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Arreglo</div>
+          <div class="detail-value">${s.arreglo}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Clase</div>
+          <div class="detail-value">${s.clase}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Municipio</div>
+          <div class="detail-value">${s.municipio}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">En servicio</div>
+          <div class="detail-value">${s.fecha}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">Capacidad MVA</div>
+      <div class="detail-grid">
+        <div class="detail-row">
+          <div class="detail-label">MVA Operativo</div>
+          <div class="detail-value green">${s.mva_op}</div>
+          <div class="mva-bar-wrap">
+            <div class="mva-bar-bg"><div class="mva-bar-fill" style="width:${pct}%"></div></div>
+          </div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">MVA Reserva</div>
+          <div class="detail-value">${s.mva_res}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">MVAR Reac Op</div>
+          <div class="detail-value">${s.mvar_reac_op}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">MVAR Reac Res</div>
+          <div class="detail-value">${s.mvar_reac_res}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">MVAR Cap Op</div>
+          <div class="detail-value">${s.mvar_cap_op}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">MVAR Cap Res</div>
+          <div class="detail-value">${s.mvar_cap_res}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">Líneas Asociadas</div>
+      ${!s.lineas_completo ? `
+        <div style="padding:8px 14px;font-family:var(--mono);font-size:10px;color:var(--amber);background:rgba(245,166,35,0.08);border-bottom:1px solid var(--border)">
+          ⚠ Información de líneas pendiente de completar
+        </div>
+      ` : ''}
+      ${s.lineas.length ? s.lineas.map(l => {
+        const existe = LINEAS.some(x => x.code === l.code);
+        return `
+        <div class="assoc-line" ${existe ? `onclick="goToLine('${l.code}')"` : ''} style="${existe ? '' : 'opacity:0.5;cursor:default;'}">
+          <div class="assoc-code">${l.code}</div>
+          <div class="assoc-info">→ ${l.colateral}${existe ? '' : ' (línea sin datos aún)'}</div>
+          <div class="item-arrow" style="color:var(--green)">${existe ? '›' : ''}</div>
+        </div>
+      `;
+      }).join('') : `<div style="padding:14px;font-family:var(--mono);font-size:11px;color:var(--text-dim)">Sin líneas registradas</div>`}
+    </div>
+
+    ${s.personal && s.personal.length ? `
+    <div class="detail-section">
+      <div class="detail-section-title">Personal / RPE / DC3</div>
+      ${s.personal.map(p => `
+        <div class="personnel-item">
+          <div class="personnel-info">
+            <div class="personnel-name">${p.nombre}</div>
+            <div class="personnel-meta">${p.rpe} · ${p.especialidad}</div>
+          </div>
+          <div class="dc3-badge ${p.dc3}">${p.dc3 === 'ok' ? 'OK' : p.dc3 === 'na' ? 'N/A' : '—'}</div>
+        </div>
+      `).join('')}
+    </div>
+    ` : ''}
+  `;
+
+  document.getElementById('sub-list-view').style.display = 'none';
+  document.querySelector('#tab-sub .search-wrap').style.display = 'none';
+  document.getElementById('sub-detail').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function closeDetail(tab) {
+  document.querySelector('#tab-' + tab + ' .search-wrap').style.display = '';
+  document.getElementById(tab + '-detail').classList.remove('active');
+  document.getElementById(tab + '-list-view').style.display = 'block';
+  currentSub = null; currentLin = null; currentUni = null;
+  renderSubList(SUBESTACIONES);
+  renderLinList(LINEAS);
+}
+
+function goToLine(code) {
+  closeDetail('sub');
+  document.querySelectorAll('.tab')[1].click();
+  setTimeout(() => openLin(code), 100);
+}
+
+// ===== DETAIL: LINE =====
+function openLin(code) {
+  const l = LINEAS.find(x => x.code === code);
+  if (!l) return;
+  currentLin = code;
+  document.getElementById('lin-detail-code').textContent = l.code;
+  document.getElementById('lin-detail-kv').textContent = l.kv + (l.kv_estimado ? ' (est.)' : '');
+
+  const sinTorres = !l.torres || l.torres.length === 0;
+
+  document.getElementById('lin-detail-body').innerHTML = `
+    <div class="detail-section">
+      <div class="detail-section-title">Datos de la Línea</div>
+      ${l.kv_estimado ? `
+        <div style="padding:6px 14px;font-family:var(--mono);font-size:10px;color:var(--amber);background:rgba(245,166,35,0.08);border-bottom:1px solid var(--border)">
+          ⚠ Tensión estimada por nomenclatura — confirmar dato real
+        </div>
+      ` : ''}
+      <div class="detail-grid">
+        <div class="detail-row">
+          <div class="detail-label">Nomenclatura</div>
+          <div class="detail-value green">${l.code}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Tensión</div>
+          <div class="detail-value amber">${l.kv}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Inicio</div>
+          <div class="detail-value">${l.inicio}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Final</div>
+          <div class="detail-value">${l.fin}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Distancia</div>
+          <div class="detail-value">${l.distancia} km</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Estructuras</div>
+          <div class="detail-value">${l.estructuras}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Conductor</div>
+          <div class="detail-value">${l.conductor}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Material</div>
+          <div class="detail-value">${l.material}</div>
+        </div>
+        ${l.fecha_op ? `
+        <div class="detail-row">
+          <div class="detail-label">Fecha operación</div>
+          <div class="detail-value">${l.fecha_op}</div>
+        </div>
+        ` : ''}
+        ${l.tipo_construccion ? `
+        <div class="detail-row">
+          <div class="detail-label">Tipo</div>
+          <div class="detail-value">${l.tipo_construccion}</div>
+        </div>
+        ` : ''}
+      </div>
+    </div>
+
+    <div class="locator-section">
+      <div class="locator-header">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M7 1v3M7 10v3M1 7h3M10 7h3" stroke="#00c8a0" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="7" cy="7" r="2.5" stroke="#00c8a0" stroke-width="1.5"/>
+        </svg>
+        <div class="locator-header-title">Localizar disparo</div>
+      </div>
+      <div class="locator-body">
+        ${sinTorres ? `
+          <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim)">
+            Pendiente — esta línea aún no tiene torres cargadas (KMZ).
+          </div>
+        ` : `
+        <div class="locator-row">
+          <select class="locator-select" id="locator-ref">
+            <option value="${l.inicio}">Medido desde ${l.inicio}</option>
+            <option value="${l.fin}">Medido desde ${l.fin}</option>
+          </select>
+          <input class="locator-input" id="locator-dist" type="number" step="0.01" placeholder="Distancia (km)">
+        </div>
+        <button class="locator-btn" onclick="localizarDisparo('${l.code}')">Localizar torre más cercana</button>
+        <div class="locator-result" id="locator-result"></div>
+        `}
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">Torres / Estructuras (muestra)</div>
+      ${sinTorres ? `
+        <div style="padding:14px;font-family:var(--mono);font-size:11px;color:var(--text-dim)">
+          Sin datos de torres todavía — pendiente de procesar KMZ.
+        </div>
+      ` : l.torres.map(t => `
+        <div class="tower-item">
+          <div class="tower-num">#${t.num}</div>
+          <div class="tower-name">${t.label}</div>
+          <a class="tower-map-btn" href="https://maps.google.com/?q=${t.lat},${t.lon}" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M6 1C4.07 1 2.5 2.57 2.5 4.5c0 2.81 3.5 6.5 3.5 6.5s3.5-3.69 3.5-6.5C9.5 2.57 7.93 1 6 1z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+              <circle cx="6" cy="4.5" r="1.2" stroke="currentColor" stroke-width="1.1"/>
+            </svg>
+            Maps
+          </a>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  document.getElementById('lin-list-view').style.display = 'none';
+  document.querySelector('#tab-lin .search-wrap').style.display = 'none';
+  document.getElementById('lin-detail').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== DETAIL: UNIFILARES =====
+function openUni(codigo) {
+  const u = UNIFILARES.find(x => x.codigo === codigo);
+  if (!u) return;
+  document.getElementById('uni-detail-name').textContent = u.nombre;
+  document.getElementById('uni-detail-kv').textContent = u.kv;
+
+  document.getElementById('uni-detail-body').innerHTML = `
+    <div class="svg-viewer">
+      <div class="svg-viewer-header">
+        <span>${u.nombre}</span>
+        <span style="color:var(--text-dim);font-size:10px">Diagrama Unifilar</span>
+      </div>
+      <div class="svg-container">
+        ${generateMockUnifilar(u.codigo)}
+      </div>
+    </div>
+    <div class="load-csv-btn" style="margin:0 0 20px 0" onclick="alert('Carga de imagen/SVG del unifilar')">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M7 1v8M4 6l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M2 10v2h10v-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Cargar imagen / SVG del unifilar
+    </div>
+  `;
+
+  document.getElementById('uni-list-view').style.display = 'none';
+  document.getElementById('uni-detail').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function generateMockUnifilar(codigo) {
+  // Simple SVG unifilar mock — barra principal con salidas
+  const w = 320, h = 400;
+  const bars = codigo === 'CEN' || codigo === 'CUC' ? 2 : 1;
+  const feeder_count = bars === 2 ? 6 : 3;
+  let svg = `<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:${w}px;background:#000;" font-family="'Share Tech Mono',monospace">`;
+
+  if (bars === 2) {
+    // Doble barra
+    svg += `<line x1="40" y1="80" x2="280" y2="80" stroke="#f5a623" stroke-width="3"/>`;
+    svg += `<text x="10" y="84" font-size="9" fill="#f5a623">B1</text>`;
+    svg += `<line x1="40" y1="120" x2="280" y2="120" stroke="#f5a623" stroke-width="3"/>`;
+    svg += `<text x="10" y="124" font-size="9" fill="#f5a623">B2</text>`;
+
+    const x_positions = [60, 100, 140, 180, 220, 260];
+    x_positions.forEach((x, i) => {
+      const id = 90000 + i*100 + Math.floor(Math.random()*10);
+      // Interruptor barra 1
+      svg += `<line x1="${x}" y1="80" x2="${x}" y2="100" stroke="#00c8a0" stroke-width="1.5"/>`;
+      svg += `<rect x="${x-8}" y="100" width="16" height="10" fill="#141a1f" stroke="#00c8a0" stroke-width="1"/>`;
+      svg += `<text x="${x}" y="108" font-size="8" fill="#00c8a0" text-anchor="middle">${id}</text>`;
+      // Interruptor barra 2
+      svg += `<line x1="${x}" y1="110" x2="${x}" y2="120" stroke="#00c8a0" stroke-width="1.5"/>`;
+      svg += `<line x1="${x}" y1="130" x2="${x}" y2="200" stroke="#00c8a0" stroke-width="1.5"/>`;
+      // Main breaker
+      svg += `<rect x="${x-10}" y="155" width="20" height="14" fill="#141a1f" stroke="#00c8a0" stroke-width="1.2" rx="1"/>`;
+      svg += `<text x="${x}" y="165" font-size="7" fill="#c8d8e0" text-anchor="middle">${90000+i*10+50}</text>`;
+      // Feeder label
+      const labels = ['CUC','GSC','ROA','CHQ','APD','SNY'];
+      svg += `<line x1="${x}" y1="200" x2="${x}" y2="240" stroke="#00c8a0" stroke-width="1.5"/>`;
+      svg += `<text x="${x}" y="255" font-size="9" fill="#c8d8e0" text-anchor="middle">${labels[i]||'—'}</text>`;
+      // Transformer symbol for first 2
+      if (i < 2) {
+        svg += `<circle cx="${x}" cy="290" r="14" fill="none" stroke="#f5a623" stroke-width="1.5"/>`;
+        svg += `<circle cx="${x}" cy="310" r="14" fill="none" stroke="#f5a623" stroke-width="1.5"/>`;
+        svg += `<text x="${x}" y="340" font-size="9" fill="#f5a623" text-anchor="middle">T${i+1}</text>`;
+      }
+    });
+  } else {
+    // Barra sencilla
+    svg += `<line x1="40" y1="80" x2="220" y2="80" stroke="#f5a623" stroke-width="3"/>`;
+    svg += `<text x="10" y="84" font-size="9" fill="#f5a623">B1</text>`;
+    const x_positions = [80, 140, 200];
+    x_positions.forEach((x, i) => {
+      const id = 70000 + i*100;
+      svg += `<line x1="${x}" y1="80" x2="${x}" y2="140" stroke="#00c8a0" stroke-width="1.5"/>`;
+      svg += `<rect x="${x-10}" y="110" width="20" height="14" fill="#141a1f" stroke="#00c8a0" stroke-width="1.2" rx="1"/>`;
+      svg += `<text x="${x}" y="120" font-size="7" fill="#c8d8e0" text-anchor="middle">${id+50}</text>`;
+      const labels = ['LÍNEA','TRAFO','SERV'];
+      svg += `<text x="${x}" y="158" font-size="9" fill="#c8d8e0" text-anchor="middle">${labels[i]}</text>`;
+      if (i === 1) {
+        svg += `<circle cx="${x}" cy="200" r="14" fill="none" stroke="#f5a623" stroke-width="1.5"/>`;
+        svg += `<circle cx="${x}" cy="220" r="14" fill="none" stroke="#f5a623" stroke-width="1.5"/>`;
+        svg += `<text x="${x}" y="250" font-size="9" fill="#f5a623" text-anchor="middle">T1</text>`;
+      }
+    });
+  }
+
+  svg += `</svg>`;
+  return svg;
+}
+
+// ===== LOCALIZADOR DE DISPARO =====
+function haversine(lat1, lon1, lat2, lon2) {
+  const R = 6371; // km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.pow(Math.sin(dLat/2), 2) + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.pow(Math.sin(dLon/2), 2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function calcularAcumulados(torres, desdeInicio) {
+  const ordenadas = desdeInicio ? torres : [...torres].slice().reverse();
+  let acc = 0;
+  const result = [];
+  for (let i = 0; i < ordenadas.length; i++) {
+    if (i > 0) {
+      acc += haversine(ordenadas[i-1].lat, ordenadas[i-1].lon, ordenadas[i].lat, ordenadas[i].lon);
+    }
+    result.push({ ...ordenadas[i], acumulado: acc });
+  }
+  return result;
+}
+
+function localizarDisparo(code) {
+  const l = LINEAS.find(x => x.code === code);
+  if (!l) return;
+  const distInput = document.getElementById('locator-dist').value;
+  const refSel = document.getElementById('locator-ref').value;
+  const resultDiv = document.getElementById('locator-result');
+
+  if (!distInput || isNaN(parseFloat(distInput))) {
+    resultDiv.innerHTML = `<div style="color:var(--red);font-size:12px">Ingresa una distancia válida en km.</div>`;
+    resultDiv.classList.add('show');
+    return;
+  }
+
+  const dist = parseFloat(distInput);
+  const desdeInicio = refSel === l.inicio;
+  const acumulados = calcularAcumulados(l.torres, desdeInicio);
+
+  // Find bracketing towers
+  let antes = acumulados[0], despues = acumulados[acumulados.length - 1];
+  for (let i = 0; i < acumulados.length - 1; i++) {
+    if (acumulados[i].acumulado <= dist && acumulados[i+1].acumulado >= dist) {
+      antes = acumulados[i];
+      despues = acumulados[i+1];
+      break;
+    }
+  }
+
+  const distAntes = (dist - antes.acumulado).toFixed(2);
+  const distDespues = (despues.acumulado - dist).toFixed(2);
+  const masCercana = parseFloat(distAntes) <= parseFloat(distDespues) ? 'antes' : 'despues';
+
+  resultDiv.innerHTML = `
+    <div class="locator-result-title">Disparo a ${dist} km desde ${refSel} — torres cercanas</div>
+    <div class="locator-tower-pair">
+      <div class="locator-tower-card ${masCercana === 'antes' ? 'nearest' : ''}">
+        <div class="locator-tower-num">#${antes.num}</div>
+        <div class="locator-tower-tipo">${antes.tipo || '—'}</div>
+        <div class="locator-tower-dist">${antes === acumulados[0] ? 'Inicio' : '−' + distAntes + ' km'}</div>
+        <a class="tower-map-btn" href="https://maps.google.com/?q=${antes.lat},${antes.lon}" target="_blank" style="justify-content:center">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M6 1C4.07 1 2.5 2.57 2.5 4.5c0 2.81 3.5 6.5 3.5 6.5s3.5-3.69 3.5-6.5C9.5 2.57 7.93 1 6 1z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+            <circle cx="6" cy="4.5" r="1.2" stroke="currentColor" stroke-width="1.1"/>
+          </svg>
+          Maps
+        </a>
+      </div>
+      <div class="locator-tower-card ${masCercana === 'despues' ? 'nearest' : ''}">
+        <div class="locator-tower-num">#${despues.num}</div>
+        <div class="locator-tower-tipo">${despues.tipo || '—'}</div>
+        <div class="locator-tower-dist">${despues === acumulados[acumulados.length-1] ? 'Fin' : '+' + distDespues + ' km'}</div>
+        <a class="tower-map-btn" href="https://maps.google.com/?q=${despues.lat},${despues.lon}" target="_blank" style="justify-content:center">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M6 1C4.07 1 2.5 2.57 2.5 4.5c0 2.81 3.5 6.5 3.5 6.5s3.5-3.69 3.5-6.5C9.5 2.57 7.93 1 6 1z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+            <circle cx="6" cy="4.5" r="1.2" stroke="currentColor" stroke-width="1.1"/>
+          </svg>
+          Maps
+        </a>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--text-dim)">La torre <span style="color:var(--green)">#${masCercana === 'antes' ? antes.num : despues.num}</span> es la más cercana al punto de disparo reportado.</div>
+  `;
+  resultDiv.classList.add('show');
+}
+
+// ===== CSV LOADER =====
+function loadCSV(type, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    alert(`CSV "${file.name}" cargado.\n(Parser pendiente — conectar con datos reales)`);
+  };
+  reader.readAsText(file);
+}
+
+// ===== INIT =====
+if (!cargarDatosLocales()) {
+  renderSubList(SUBESTACIONES);
+  renderLinList(LINEAS);
+  setStatus('LOCAL (demo)', false);
+}
+renderUniList();
+
+</script>
+</body>
+</html>

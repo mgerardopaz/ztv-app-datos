@@ -978,22 +978,7 @@
       <option value="">— Departamento —</option>
     </select>
   </div>
-  <div style="padding: 12px; font-size: 11px; overflow-x: auto;">
-    <table style="width: 100%; border-collapse: collapse; font-size: 11px; table-layout: auto;">
-      <thead>
-        <tr style="border-bottom: 1px solid var(--green);">
-          <th style="padding: 6px 4px; text-align: center; color: var(--green); font-weight: 600; width: 25px;">#</th>
-          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Nombre</th>
-          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">RPE</th>
-          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Categoría</th>
-          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Depto</th>
-          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Sector</th>
-          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Tipo</th>
-        </tr>
-      </thead>
-      <tbody id="per-body"></tbody>
-    </table>
-  </div>
+  <div style="padding: 12px;" id="per-list"></div>
 </div>
 
 <script>
@@ -1849,20 +1834,22 @@ function loadCSV(type, input) {
 let PERSONAL_DATA = [];
 
 function renderPerTable(data = PERSONAL_DATA) {
-  const tbody = document.getElementById('per-body');
-  tbody.innerHTML = '';
-  data.forEach((p, i) => {
-    const row = tbody.insertRow();
-    row.innerHTML = `
-      <td style="padding: 6px 4px; text-align: center; font-weight: 600; color: var(--text-dim);">${i+1}</td>
-      <td style="padding: 6px 4px;">${p.nombre}</td>
-      <td style="padding: 6px 4px; color: var(--green); font-weight: 600;">${p.rpe}</td>
-      <td style="padding: 6px 4px; font-size: 10px;">${p.categoría}</td>
-      <td style="padding: 6px 4px; font-size: 10px;">${p.departamento}</td>
-      <td style="padding: 6px 4px; color: #888; font-size: 10px;">${p.sector}</td>
-      <td style="padding: 6px 4px; color: var(--amber); font-size: 10px;">${p.tipo}</td>
-    `;
-  });
+  const list = document.getElementById('per-list');
+  if (data.length === 0) {
+    list.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-dim);">— Sin resultados —</div>';
+    return;
+  }
+  list.innerHTML = data.map((p, i) => `
+    <div style="display: grid; grid-template-columns: 30px 1fr 80px 100px 120px 80px 100px; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 11px; align-items: center;">
+      <div style="text-align: center; color: var(--text-dim); font-weight: 600;">${i+1}</div>
+      <div>${p.nombre}</div>
+      <div style="color: var(--green); font-weight: 600;">${p.rpe}</div>
+      <div style="color: var(--text-dim);">${p.categoría}</div>
+      <div style="color: var(--text-dim);">${p.departamento}</div>
+      <div style="color: #888;">${p.sector}</div>
+      <div style="color: var(--amber);">${p.tipo}</div>
+    </div>
+  `).join('');
 }
 
 function filterPersonal() {

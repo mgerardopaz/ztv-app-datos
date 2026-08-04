@@ -34,6 +34,7 @@
     overflow-x: hidden;
   }
 
+  /* Scanline overlay */
   body::before {
     content: '';
     position: fixed;
@@ -49,6 +50,7 @@
     z-index: 9999;
   }
 
+  /* HEADER */
   .header {
     background: var(--bg2);
     border-bottom: 1px solid var(--border);
@@ -115,6 +117,7 @@
     50% { opacity: 0.4; }
   }
 
+  /* UPDATE BUTTON */
   .update-btn {
     background: none;
     border: 1px solid var(--border);
@@ -136,6 +139,7 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* UPDATE BANNER */
   .update-banner {
     display: none;
     padding: 8px 16px;
@@ -155,6 +159,7 @@
     color: var(--red);
   }
 
+  /* TABS */
   .tabs {
     display: flex;
     background: var(--bg2);
@@ -195,6 +200,7 @@
 
   .tab:hover { color: var(--text-bright); }
 
+  /* CONTENT */
   .content { display: none; animation: fadeIn 0.2s ease; }
   .content.active { display: block; }
 
@@ -203,6 +209,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* SEARCH BAR */
   .search-wrap {
     padding: 12px 16px;
     background: var(--bg2);
@@ -238,6 +245,7 @@
     pointer-events: none;
   }
 
+  /* LIST */
   .list { padding-bottom: 80px; }
 
   .list-item {
@@ -288,6 +296,7 @@
     font-size: 12px;
   }
 
+  /* DETAIL PANEL */
   .detail-panel {
     display: none;
     background: var(--bg);
@@ -401,6 +410,7 @@
   .detail-value.green { color: var(--green); }
   .detail-value.amber { color: var(--amber); }
 
+  /* MVA bar */
   .mva-bar-wrap { margin-top: 6px; }
   .mva-bar-bg {
     height: 4px;
@@ -415,6 +425,7 @@
     transition: width 0.6s ease;
   }
 
+  /* LINES associated */
   .assoc-line {
     display: flex;
     align-items: center;
@@ -433,6 +444,7 @@
 
   .assoc-info { flex: 1; font-size: 13px; color: var(--text-dim); }
 
+  /* MAPS button */
   .maps-btn {
     display: flex;
     align-items: center;
@@ -459,6 +471,7 @@
     box-shadow: 0 0 12px var(--green-dim);
   }
 
+  /* DISPARO LOCATOR */
   .locator-section {
     background: var(--panel);
     border: 1px solid var(--green-mid);
@@ -587,6 +600,7 @@
     margin-bottom: 8px;
   }
 
+  /* PERSONNEL */
   .personnel-item {
     display: flex;
     align-items: center;
@@ -620,7 +634,6 @@
   .dc3-badge.ok { color: var(--green); background: var(--green-dim); border: 1px solid var(--green-mid); }
   .dc3-badge.na { color: var(--amber); background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.3); }
   .dc3-badge.pending { color: var(--text-dim); background: var(--panel); border: 1px solid var(--border); }
-  
   .tower-item {
     display: flex;
     align-items: center;
@@ -664,6 +677,7 @@
     color: var(--green);
   }
 
+  /* UNIFILARES */
   .unifilar-item {
     display: flex;
     align-items: center;
@@ -706,6 +720,7 @@
     padding: 2px 6px;
   }
 
+  /* SVG Viewer */
   .svg-viewer {
     background: #000;
     border: 1px solid var(--border);
@@ -733,6 +748,7 @@
     max-height: 500px;
   }
 
+  /* SECTION LABEL */
   .section-label {
     font-family: var(--mono);
     font-size: 10px;
@@ -742,6 +758,7 @@
     padding: 16px 16px 8px;
   }
 
+  /* COUNT BADGE */
   .count-badge {
     font-family: var(--mono);
     font-size: 10px;
@@ -753,6 +770,7 @@
     margin-left: 6px;
   }
 
+  /* No results */
   .no-results {
     text-align: center;
     padding: 48px 24px;
@@ -761,6 +779,7 @@
     font-size: 13px;
   }
 
+  /* LOAD CSV button */
   .load-csv-btn {
     display: flex;
     align-items: center;
@@ -785,14 +804,7 @@
 
   input[type=file] { display: none; }
 
-  /* Personal tab styles */
-  #tab-per table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 12px; }
-  #tab-per tbody tr { border-bottom: 1px solid var(--border); }
-  #tab-per td { padding: 8px; }
-  #tab-per tbody td:nth-child(3) { color: var(--green); font-weight: 600; }
-  #tab-per tbody td:nth-child(6) { color: #888; }
-  #tab-per tbody td:nth-child(7) { color: var(--amber); }
-
+  /* Responsive */
   @media (min-width: 600px) {
     .detail-grid { grid-template-columns: 1fr 1fr 1fr; }
   }
@@ -800,6 +812,7 @@
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="header">
   <div class="header-logo">
     <svg class="logo-icon" viewBox="0 0 28 28" fill="none">
@@ -828,8 +841,10 @@
   </div>
 </div>
 
+<!-- UPDATE BANNER -->
 <div class="update-banner" id="update-banner"></div>
 
+<!-- TABS -->
 <div class="tabs">
   <div class="tab active" onclick="showTab('sub')">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -867,6 +882,7 @@
   </div>
 </div>
 
+<!-- ==================== SUBESTACIONES ==================== -->
 <div class="content active" id="tab-sub">
   <div class="search-wrap">
     <span class="search-icon">
@@ -878,6 +894,7 @@
     <input class="search-input" id="sub-search" type="text" placeholder="Buscar subestación..." oninput="filterSubs()">
   </div>
 
+  <!-- List view -->
   <div id="sub-list-view">
     <div class="section-label">Subestaciones <span class="count-badge" id="sub-count">8</span></div>
     <div class="load-csv-btn" onclick="document.getElementById('csv-sub').click()">
@@ -891,6 +908,7 @@
     <div class="list" id="sub-list"></div>
   </div>
 
+  <!-- Detail view -->
   <div id="sub-detail" class="detail-panel">
     <div class="detail-header">
       <button class="back-btn" onclick="closeDetail('sub')">← Volver</button>
@@ -901,6 +919,7 @@
   </div>
 </div>
 
+<!-- ==================== LÍNEAS ==================== -->
 <div class="content" id="tab-lin">
   <div class="search-wrap">
     <span class="search-icon">
@@ -935,6 +954,7 @@
   </div>
 </div>
 
+<!-- ==================== UNIFILARES ==================== -->
 <div class="content" id="tab-uni">
   <div id="uni-list-view">
     <div class="section-label">Unifilares disponibles <span class="count-badge">5</span></div>
@@ -958,17 +978,17 @@
       <option value="">— Departamento —</option>
     </select>
   </div>
-  <div style="padding: 16px;">
-    <table>
+  <div style="padding: 16px; overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
       <thead>
-        <tr>
-          <th style="text-align: left; color: var(--green); font-weight: 600;">#</th>
-          <th style="text-align: left; color: var(--green); font-weight: 600;">Nombre</th>
-          <th style="text-align: left; color: var(--green); font-weight: 600;">RPE</th>
-          <th style="text-align: left; color: var(--green); font-weight: 600;">Categoría</th>
-          <th style="text-align: left; color: var(--green); font-weight: 600;">Departamento</th>
-          <th style="text-align: left; color: var(--green); font-weight: 600;">Sector</th>
-          <th style="text-align: left; color: var(--green); font-weight: 600;">Tipo</th>
+        <tr style="border-bottom: 2px solid var(--green);">
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">#</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Nombre</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">RPE</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Categoría</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Departamento</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Sector</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Tipo</th>
         </tr>
       </thead>
       <tbody id="per-body"></tbody>
@@ -977,7 +997,13 @@
 </div>
 
 <script>
-const SUBESTACIONES = [
+// ===== CONFIG =====
+// Raw URL del JSON en GitHub (rama, owner/repo y archivo)
+const DATA_URL = 'https://raw.githubusercontent.com/mgerardopaz/ztv-app-datos/main/ztvalle_datos.json';
+const STORAGE_KEY = 'ztv_datos_v3';
+
+// ===== DATA (fallback inicial / mock) =====
+let SUBESTACIONES = [
   {
     codigo: 'AGS', nombre: 'Agrícola Sonoyta',
     voltajes: '115kV / 34.5kV', proceso: 'SUBTRANSMISIÓN', tipo: 'CONV.',
@@ -1049,13 +1075,26 @@ const SUBESTACIONES = [
   }
 ];
 
-const LINEAS = [
+let LINEAS = [
   {
     code: 'A3060', kv: '230kV',
     inicio: 'CUC', fin: 'GSC', distancia: '145.24',
     conductor: 'BLUEJAY', material: 'ACSR', estructuras: 350,
     torres: [
       { num: 1, lat: 32.5947, lon: -115.3782, label: 'EST-001 · Torre inicio CUC', tipo: 'REMATE' },
+      { num: 2, lat: 32.5938, lon: -115.3705, label: 'EST-002', tipo: 'SUSPENSIÓN' },
+      { num: 3, lat: 32.5926, lon: -115.3622, label: 'EST-003', tipo: 'SUSPENSIÓN' },
+      { num: 4, lat: 32.5915, lon: -115.3540, label: 'EST-004', tipo: 'SUSPENSIÓN' },
+      { num: 5, lat: 32.5901, lon: -115.3458, label: 'EST-005', tipo: 'REMATE DEFLEXIÓN' },
+      { num: 6, lat: 32.5884, lon: -115.3378, label: 'EST-006', tipo: 'SUSPENSIÓN' },
+      { num: 7, lat: 32.5870, lon: -115.3296, label: 'EST-007', tipo: 'SUSPENSIÓN' },
+      { num: 8, lat: 32.5855, lon: -115.3215, label: 'EST-008', tipo: 'SUSPENSIÓN' },
+      { num: 9, lat: 32.5840, lon: -115.3134, label: 'EST-009', tipo: 'REMATE' },
+      { num: 10, lat: 32.5822, lon: -115.3055, label: 'EST-010', tipo: 'SUSPENSIÓN' },
+      { num: 50, lat: 32.5600, lon: -115.3200, label: 'EST-050', tipo: 'SUSPENSIÓN' },
+      { num: 100, lat: 32.5300, lon: -115.2800, label: 'EST-100', tipo: 'REMATE' },
+      { num: 200, lat: 32.5100, lon: -115.2200, label: 'EST-200', tipo: 'SUSPENSIÓN' },
+      { num: 300, lat: 32.4980, lon: -115.1600, label: 'EST-300', tipo: 'SUSPENSIÓN' },
       { num: 350, lat: 32.4891, lon: -115.1234, label: 'EST-350 · Torre fin GSC', tipo: 'REMATE' },
     ]
   },
@@ -1065,6 +1104,7 @@ const LINEAS = [
     conductor: 'CARDINAL', material: 'ACSR', estructuras: 248,
     torres: [
       { num: 1, lat: 32.6637, lon: -115.4710, label: 'EST-001 · Torre inicio CHQ' },
+      { num: 100, lat: 32.5800, lon: -115.3500, label: 'EST-100' },
       { num: 248, lat: 32.4891, lon: -115.1234, label: 'EST-248 · Torre fin GSC' },
     ]
   },
@@ -1072,13 +1112,21 @@ const LINEAS = [
     code: '73A60', kv: '115kV',
     inicio: 'CUC', fin: 'CHQ', distancia: '22.50',
     conductor: 'HAWK', material: 'ACSR', estructuras: 68,
-    torres: []
+    torres: [
+      { num: 1, lat: 32.5947, lon: -115.3782, label: 'EST-001 · Torre inicio CUC' },
+      { num: 34, lat: 32.6291, lon: -115.4246, label: 'EST-034' },
+      { num: 68, lat: 32.6637, lon: -115.4710, label: 'EST-068 · Torre fin CHQ' },
+    ]
   },
   {
     code: '73A10', kv: '115kV',
     inicio: 'CUC', fin: 'ROA', distancia: '67.80',
     conductor: 'HAWK', material: 'ACSR', estructuras: 190,
-    torres: []
+    torres: [
+      { num: 1, lat: 32.5947, lon: -115.3782, label: 'EST-001 · Torre inicio CUC' },
+      { num: 95, lat: 32.3535, lon: -115.0508, label: 'EST-095' },
+      { num: 190, lat: 32.1123, lon: -114.7234, label: 'EST-190 · Torre fin ROA' },
+    ]
   }
 ];
 
@@ -1090,12 +1138,181 @@ const UNIFILARES = [
   { nombre: 'SE Cucapah', kv: '230kV', codigo: 'CUC' },
 ];
 
-let PERSONAL_DATA = [];
-
+// ===== STATE =====
 let currentSub = null;
 let currentLin = null;
 let currentUni = null;
+let PERSONAL_DATA = [];
+let dataSource = 'mock'; // 'mock' | 'local' | 'remote'
+let dataGeneradoFecha = null;
 
+// ===== MAPEO v3 -> ESTRUCTURA INTERNA =====
+// Convierte el JSON v3 (subestaciones {} + lineas {}) en los arrays
+// SUBESTACIONES / LINEAS que usa el resto de la app.
+
+// Estima kV por convención de nomenclatura CFE cuando el dato no viene explícito.
+function estimarKV(code) {
+  const c = String(code).toUpperCase();
+  if (c.startsWith('A')) return '230kV';      // A30xx -> 230kV
+  if (c.startsWith('6')) return '69kV';
+  if (c.startsWith('7')) return '115kV';
+  if (c.startsWith('8')) return '161kV';
+  if (c.startsWith('9')) return '230kV';
+  return '—';
+}
+
+function mapV3ToApp(json) {
+  if (!json || typeof json !== 'object') throw new Error('JSON vacío o inválido');
+  if (!json.subestaciones || !json.lineas) throw new Error('Estructura inesperada: faltan "subestaciones" o "lineas"');
+
+  const lineasMap = json.lineas;
+
+  // --- Lineas ---
+  const lineasArr = Object.entries(lineasMap).map(([code, l]) => ({
+    code: code,
+    kv: estimarKV(code),
+    kv_estimado: true,
+    inicio: l.inicio || '—',
+    fin: l.final || '—',
+    distancia: (l.distancia_km != null) ? String(l.distancia_km) : '—',
+    conductor: l.conductor || '—',
+    material: l.material || '—',
+    estructuras: (l.estructuras != null) ? l.estructuras : '—',
+    fecha_op: l.fecha_op || null,
+    tipo_construccion: l.tipo || null,
+    km_aereo: l.km_aereo,
+    km_subterraneo: l.km_subterraneo,
+    comentario: l.comentario || null,
+    torres: Array.isArray(l.torres) ? l.torres : []
+  }));
+
+  // --- Subestaciones ---
+  const subsArr = Object.entries(json.subestaciones).map(([code, s]) => ({
+    codigo: code,
+    nombre: s.nombre || code,
+    voltajes: (s.voltajes != null) ? String(s.voltajes) : '—',
+    proceso: s.proceso || '—',
+    tipo: s.tipo || '—',
+    arreglo: s.arreglo || '—',
+    mva_op: numOrZero(s.mva_op),
+    mva_res: numOrZero(s.mva_res),
+    mvar_reac_op: numOrZero(s.mvar_reac_op),
+    mvar_reac_res: numOrZero(s.mvar_reac_res),
+    mvar_cap_op: numOrZero(s.mvar_cap_op),
+    mvar_cap_res: numOrZero(s.mvar_cap_res),
+    municipio: s.municipio || '—',
+    clase: s.clase || '—',
+    fecha: s.pserv || '—',
+    lat: null, // pendiente: vendrá de KMZ
+    lon: null,
+    lineas: Array.isArray(s.lineas) ? s.lineas.filter(l => l.code && l.colateral) : [],
+    lineas_completo: !!s.lineas_completo,
+    personal: null // pendiente: archivo de personal/RPE/DC3
+  }));
+
+  return { subsArr, lineasArr };
+}
+
+function numOrZero(v) {
+  return (typeof v === 'number') ? v : 0;
+}
+
+// ===== ACTUALIZAR DATOS =====
+function setStatus(text, online) {
+  document.getElementById('status-text').textContent = text;
+  const dot = document.getElementById('status-dot');
+  dot.classList.toggle('offline', !online);
+}
+
+function showBanner(msg, isError) {
+  const b = document.getElementById('update-banner');
+  b.textContent = msg;
+  b.classList.remove('show', 'error');
+  if (isError) b.classList.add('error');
+  b.classList.add('show');
+  clearTimeout(window._bannerTimeout);
+  window._bannerTimeout = setTimeout(() => b.classList.remove('show'), 5000);
+}
+
+function aplicarDatos(json, origen) {
+  const { subsArr, lineasArr } = mapV3ToApp(json);
+  SUBESTACIONES = subsArr;
+  LINEAS = lineasArr;
+  dataSource = origen;
+  dataGeneradoFecha = json.generado || null;
+
+  // Re-render todo, cerrando cualquier detalle abierto
+  currentSub = null; currentLin = null;
+  document.getElementById('sub-detail').classList.remove('active');
+  document.getElementById('lin-detail').classList.remove('active');
+  document.getElementById('sub-list-view').style.display = 'block';
+  document.getElementById('lin-list-view').style.display = 'block';
+  document.querySelector('#tab-sub .search-wrap').style.display = '';
+  document.querySelector('#tab-lin .search-wrap').style.display = '';
+
+  renderSubList(SUBESTACIONES);
+  renderLinList(LINEAS);
+  PERSONAL_DATA = json.personal || [];
+  initPersonal();
+
+  const fechaTxt = dataGeneradoFecha ? ` (datos: ${dataGeneradoFecha})` : '';
+  if (origen === 'remote') {
+    setStatus('ACTUALIZADO' + fechaTxt, true);
+  } else if (origen === 'local') {
+    setStatus('LOCAL' + fechaTxt, false);
+  } else {
+    setStatus('LOCAL (demo)', false);
+  }
+}
+
+async function actualizarDatos() {
+  const btn = document.getElementById('update-btn');
+  const label = document.getElementById('update-label');
+  btn.disabled = true;
+  btn.classList.add('loading');
+  const labelPrevio = label.textContent;
+  label.textContent = 'Actualizando...';
+
+  try {
+    const resp = await fetch(DATA_URL, { cache: 'no-store' });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const json = await resp.json();
+
+    aplicarDatos(json, 'remote');
+
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(json));
+      localStorage.setItem(STORAGE_KEY + '_fecha', new Date().toISOString());
+    } catch (e) { /* almacenamiento no disponible, no es crítico */ }
+
+    const n_subs = json.subestaciones ? Object.keys(json.subestaciones).length : 0;
+    const n_lin = json.lineas ? Object.keys(json.lineas).length : 0;
+    showBanner(`Datos actualizados: ${n_subs} subestaciones, ${n_lin} líneas (v${json.version || '?'})`, false);
+  } catch (err) {
+    showBanner('No se pudo actualizar: ' + err.message + '. Usando datos locales.', true);
+    setStatus('SIN CONEXIÓN', false);
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    label.textContent = labelPrevio;
+  }
+}
+
+// ===== CARGA INICIAL: intenta usar lo último guardado en localStorage =====
+function cargarDatosLocales() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const json = JSON.parse(raw);
+    aplicarDatos(json, 'local');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+
+// ===== TABS =====
 function showTab(tab) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
@@ -1103,6 +1320,7 @@ function showTab(tab) {
   document.getElementById('tab-' + tab).classList.add('active');
 }
 
+// ===== RENDER LISTS =====
 function renderSubList(items) {
   const list = document.getElementById('sub-list');
   document.getElementById('sub-count').textContent = items.length;
@@ -1149,6 +1367,7 @@ function renderUniList() {
   `).join('');
 }
 
+// ===== FILTER =====
 function filterSubs() {
   const q = document.getElementById('sub-search').value.toLowerCase();
   renderSubList(SUBESTACIONES.filter(s =>
@@ -1163,6 +1382,7 @@ function filterLines() {
   ));
 }
 
+// ===== DETAIL: SUB =====
 function openSub(codigo) {
   const s = SUBESTACIONES.find(x => x.codigo === codigo);
   if (!s) return;
@@ -1174,6 +1394,7 @@ function openSub(codigo) {
   const pct = Math.round((s.mva_op / maxMVA) * 100);
 
   document.getElementById('sub-detail-body').innerHTML = `
+    ${(s.lat != null && s.lon != null) ? `
     <a class="maps-btn" href="https://maps.google.com/?q=${s.lat},${s.lon}" target="_blank">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M8 1C5.24 1 3 3.24 3 6c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5z" stroke="currentColor" stroke-width="1.3" fill="none"/>
@@ -1181,6 +1402,11 @@ function openSub(codigo) {
       </svg>
       Abrir ubicación en Maps
     </a>
+    ` : `
+    <div class="detail-section" style="padding:10px 14px;font-family:var(--mono);font-size:11px;color:var(--text-dim)">
+      Ubicación pendiente (se llenará al procesar KMZ)
+    </div>
+    `}
 
     <div class="detail-section">
       <div class="detail-section-title">Características Generales</div>
@@ -1255,13 +1481,21 @@ function openSub(codigo) {
 
     <div class="detail-section">
       <div class="detail-section-title">Líneas Asociadas</div>
-      ${s.lineas.map(l => `
-        <div class="assoc-line" onclick="goToLine('${l.code}')">
-          <div class="assoc-code">${l.code}</div>
-          <div class="assoc-info">→ ${l.colateral}</div>
-          <div class="item-arrow" style="color:var(--green)">›</div>
+      ${!s.lineas_completo ? `
+        <div style="padding:8px 14px;font-family:var(--mono);font-size:10px;color:var(--amber);background:rgba(245,166,35,0.08);border-bottom:1px solid var(--border)">
+          ⚠ Información de líneas pendiente de completar
         </div>
-      `).join('')}
+      ` : ''}
+      ${s.lineas.length ? s.lineas.map(l => {
+        const existe = LINEAS.some(x => x.code === l.code);
+        return `
+        <div class="assoc-line" ${existe ? `onclick="goToLine('${l.code}')"` : ''} style="${existe ? '' : 'opacity:0.5;cursor:default;'}">
+          <div class="assoc-code">${l.code}</div>
+          <div class="assoc-info">→ ${l.colateral}${existe ? '' : ' (línea sin datos aún)'}</div>
+          <div class="item-arrow" style="color:var(--green)">${existe ? '›' : ''}</div>
+        </div>
+      `;
+      }).join('') : `<div style="padding:14px;font-family:var(--mono);font-size:11px;color:var(--text-dim)">Sin líneas registradas</div>`}
     </div>
 
     ${s.personal && s.personal.length ? `
@@ -1301,16 +1535,24 @@ function goToLine(code) {
   setTimeout(() => openLin(code), 100);
 }
 
+// ===== DETAIL: LINE =====
 function openLin(code) {
   const l = LINEAS.find(x => x.code === code);
   if (!l) return;
   currentLin = code;
   document.getElementById('lin-detail-code').textContent = l.code;
-  document.getElementById('lin-detail-kv').textContent = l.kv;
+  document.getElementById('lin-detail-kv').textContent = l.kv + (l.kv_estimado ? ' (est.)' : '');
+
+  const sinTorres = !l.torres || l.torres.length === 0;
 
   document.getElementById('lin-detail-body').innerHTML = `
     <div class="detail-section">
       <div class="detail-section-title">Datos de la Línea</div>
+      ${l.kv_estimado ? `
+        <div style="padding:6px 14px;font-family:var(--mono);font-size:10px;color:var(--amber);background:rgba(245,166,35,0.08);border-bottom:1px solid var(--border)">
+          ⚠ Tensión estimada por nomenclatura — confirmar dato real
+        </div>
+      ` : ''}
       <div class="detail-grid">
         <div class="detail-row">
           <div class="detail-label">Nomenclatura</div>
@@ -1344,6 +1586,18 @@ function openLin(code) {
           <div class="detail-label">Material</div>
           <div class="detail-value">${l.material}</div>
         </div>
+        ${l.fecha_op ? `
+        <div class="detail-row">
+          <div class="detail-label">Fecha operación</div>
+          <div class="detail-value">${l.fecha_op}</div>
+        </div>
+        ` : ''}
+        ${l.tipo_construccion ? `
+        <div class="detail-row">
+          <div class="detail-label">Tipo</div>
+          <div class="detail-value">${l.tipo_construccion}</div>
+        </div>
+        ` : ''}
       </div>
     </div>
 
@@ -1356,6 +1610,11 @@ function openLin(code) {
         <div class="locator-header-title">Localizar disparo</div>
       </div>
       <div class="locator-body">
+        ${sinTorres ? `
+          <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim)">
+            Pendiente — esta línea aún no tiene torres cargadas (KMZ).
+          </div>
+        ` : `
         <div class="locator-row">
           <select class="locator-select" id="locator-ref">
             <option value="${l.inicio}">Medido desde ${l.inicio}</option>
@@ -1365,12 +1624,17 @@ function openLin(code) {
         </div>
         <button class="locator-btn" onclick="localizarDisparo('${l.code}')">Localizar torre más cercana</button>
         <div class="locator-result" id="locator-result"></div>
+        `}
       </div>
     </div>
 
     <div class="detail-section">
       <div class="detail-section-title">Torres / Estructuras (muestra)</div>
-      ${l.torres.map(t => `
+      ${sinTorres ? `
+        <div style="padding:14px;font-family:var(--mono);font-size:11px;color:var(--text-dim)">
+          Sin datos de torres todavía — pendiente de procesar KMZ.
+        </div>
+      ` : l.torres.map(t => `
         <div class="tower-item">
           <div class="tower-num">#${t.num}</div>
           <div class="tower-name">${t.label}</div>
@@ -1392,6 +1656,7 @@ function openLin(code) {
   window.scrollTo(0, 0);
 }
 
+// ===== DETAIL: UNIFILARES =====
 function openUni(codigo) {
   const u = UNIFILARES.find(x => x.codigo === codigo);
   if (!u) return;
@@ -1423,11 +1688,14 @@ function openUni(codigo) {
 }
 
 function generateMockUnifilar(codigo) {
+  // Simple SVG unifilar mock — barra principal con salidas
   const w = 320, h = 400;
   const bars = codigo === 'CEN' || codigo === 'CUC' ? 2 : 1;
+  const feeder_count = bars === 2 ? 6 : 3;
   let svg = `<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-width:${w}px;background:#000;" font-family="'Share Tech Mono',monospace">`;
 
   if (bars === 2) {
+    // Doble barra
     svg += `<line x1="40" y1="80" x2="280" y2="80" stroke="#f5a623" stroke-width="3"/>`;
     svg += `<text x="10" y="84" font-size="9" fill="#f5a623">B1</text>`;
     svg += `<line x1="40" y1="120" x2="280" y2="120" stroke="#f5a623" stroke-width="3"/>`;
@@ -1436,16 +1704,21 @@ function generateMockUnifilar(codigo) {
     const x_positions = [60, 100, 140, 180, 220, 260];
     x_positions.forEach((x, i) => {
       const id = 90000 + i*100 + Math.floor(Math.random()*10);
+      // Interruptor barra 1
       svg += `<line x1="${x}" y1="80" x2="${x}" y2="100" stroke="#00c8a0" stroke-width="1.5"/>`;
       svg += `<rect x="${x-8}" y="100" width="16" height="10" fill="#141a1f" stroke="#00c8a0" stroke-width="1"/>`;
       svg += `<text x="${x}" y="108" font-size="8" fill="#00c8a0" text-anchor="middle">${id}</text>`;
+      // Interruptor barra 2
       svg += `<line x1="${x}" y1="110" x2="${x}" y2="120" stroke="#00c8a0" stroke-width="1.5"/>`;
       svg += `<line x1="${x}" y1="130" x2="${x}" y2="200" stroke="#00c8a0" stroke-width="1.5"/>`;
+      // Main breaker
       svg += `<rect x="${x-10}" y="155" width="20" height="14" fill="#141a1f" stroke="#00c8a0" stroke-width="1.2" rx="1"/>`;
       svg += `<text x="${x}" y="165" font-size="7" fill="#c8d8e0" text-anchor="middle">${90000+i*10+50}</text>`;
+      // Feeder label
       const labels = ['CUC','GSC','ROA','CHQ','APD','SNY'];
       svg += `<line x1="${x}" y1="200" x2="${x}" y2="240" stroke="#00c8a0" stroke-width="1.5"/>`;
       svg += `<text x="${x}" y="255" font-size="9" fill="#c8d8e0" text-anchor="middle">${labels[i]||'—'}</text>`;
+      // Transformer symbol for first 2
       if (i < 2) {
         svg += `<circle cx="${x}" cy="290" r="14" fill="none" stroke="#f5a623" stroke-width="1.5"/>`;
         svg += `<circle cx="${x}" cy="310" r="14" fill="none" stroke="#f5a623" stroke-width="1.5"/>`;
@@ -1453,6 +1726,7 @@ function generateMockUnifilar(codigo) {
       }
     });
   } else {
+    // Barra sencilla
     svg += `<line x1="40" y1="80" x2="220" y2="80" stroke="#f5a623" stroke-width="3"/>`;
     svg += `<text x="10" y="84" font-size="9" fill="#f5a623">B1</text>`;
     const x_positions = [80, 140, 200];
@@ -1475,8 +1749,9 @@ function generateMockUnifilar(codigo) {
   return svg;
 }
 
+// ===== LOCALIZADOR DE DISPARO =====
 function haversine(lat1, lon1, lat2, lon2) {
-  const R = 6371;
+  const R = 6371; // km
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
   const a = Math.pow(Math.sin(dLat/2), 2) + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.pow(Math.sin(dLon/2), 2);
@@ -1513,6 +1788,7 @@ function localizarDisparo(code) {
   const desdeInicio = refSel === l.inicio;
   const acumulados = calcularAcumulados(l.torres, desdeInicio);
 
+  // Find bracketing towers
   let antes = acumulados[0], despues = acumulados[acumulados.length - 1];
   for (let i = 0; i < acumulados.length - 1; i++) {
     if (acumulados[i].acumulado <= dist && acumulados[i+1].acumulado >= dist) {
@@ -1559,6 +1835,7 @@ function localizarDisparo(code) {
   resultDiv.classList.add('show');
 }
 
+// ===== CSV LOADER =====
 function loadCSV(type, input) {
   const file = input.files[0];
   if (!file) return;
@@ -1569,20 +1846,20 @@ function loadCSV(type, input) {
   reader.readAsText(file);
 }
 
-// PERSONAL
+// ===== PERSONAL =====
 function renderPerTable(data = PERSONAL_DATA) {
   const tbody = document.getElementById('per-body');
   tbody.innerHTML = '';
   data.forEach((p, i) => {
     const row = tbody.insertRow();
     row.innerHTML = `
-      <td>${i+1}</td>
-      <td>${p.nombre}</td>
-      <td>${p.rpe}</td>
-      <td>${p.categoría}</td>
-      <td>${p.departamento}</td>
-      <td>${p.sector}</td>
-      <td>${p.tipo}</td>
+      <td style="padding: 8px;">${i+1}</td>
+      <td style="padding: 8px;">${p.nombre}</td>
+      <td style="padding: 8px; color: var(--green); font-weight: 600;">${p.rpe}</td>
+      <td style="padding: 8px;">${p.categoría}</td>
+      <td style="padding: 8px;">${p.departamento}</td>
+      <td style="padding: 8px; color: #888;">${p.sector}</td>
+      <td style="padding: 8px; color: var(--amber);">${p.tipo}</td>
     `;
   });
 }
@@ -1610,45 +1887,15 @@ function initPersonal() {
   renderPerTable();
 }
 
-// SYNC DATOS
-const DATA_URL = 'https://raw.githubusercontent.com/mgerardopaz/ztv-app-datos/main/ztvalle_datos.json';
-
-async function actualizarDatos() {
-  const btn = document.getElementById('update-btn');
-  btn.disabled = true;
-  const label = document.getElementById('update-label');
-  label.textContent = 'Actualizando...';
-  const banner = document.getElementById('update-banner');
-
-  try {
-    const resp = await fetch(DATA_URL, { cache: 'no-store' });
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const json = await resp.json();
-
-    // Asignar datos si están en el JSON
-    if (json.personal) {
-      PERSONAL_DATA = json.personal;
-      initPersonal();
-    }
-
-    banner.textContent = '✓ Datos actualizados correctamente';
-    banner.classList.add('show');
-    setTimeout(() => banner.classList.remove('show'), 4000);
-  } catch (err) {
-    banner.textContent = '✗ Error: ' + err.message;
-    banner.classList.add('error');
-    banner.classList.add('show');
-    setTimeout(() => banner.classList.remove('show'), 5000);
-  } finally {
-    btn.disabled = false;
-    label.textContent = 'Actualizar';
-  }
+// ===== INIT =====
+if (!cargarDatosLocales()) {
+  renderSubList(SUBESTACIONES);
+  renderLinList(LINEAS);
+  initPersonal();
+  setStatus('LOCAL (demo)', false);
 }
-
-renderSubList(SUBESTACIONES);
-renderLinList(LINEAS);
 renderUniList();
-initPersonal();
+
 </script>
 </body>
 </html>

@@ -1249,6 +1249,7 @@ function aplicarDatos(json, origen) {
   const { subsArr, lineasArr } = mapV3ToApp(json);
   SUBESTACIONES = subsArr;
   LINEAS = lineasArr;
+  PERSONAL_DATA = json.personal || [];
   dataSource = origen;
   dataGeneradoFecha = json.generado || null;
 
@@ -1263,6 +1264,7 @@ function aplicarDatos(json, origen) {
 
   renderSubList(SUBESTACIONES);
   renderLinList(LINEAS);
+  initPersonal();
 
   const fechaTxt = dataGeneradoFecha ? ` (datos: ${dataGeneradoFecha})` : '';
   if (origen === 'remote') {
@@ -1536,6 +1538,7 @@ function closeDetail(tab) {
   currentSub = null; currentLin = null; currentUni = null;
   renderSubList(SUBESTACIONES);
   renderLinList(LINEAS);
+  initPersonal();
 }
 
 function goToLine(code) {
@@ -1859,6 +1862,7 @@ function loadCSV(type, input) {
 if (!cargarDatosLocales()) {
   renderSubList(SUBESTACIONES);
   renderLinList(LINEAS);
+  initPersonal();
   setStatus('LOCAL (demo)', false);
 }
 renderUniList();

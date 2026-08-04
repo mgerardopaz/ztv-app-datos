@@ -873,6 +873,13 @@
     </svg>
     Unifilares
   </div>
+  <div class="tab" onclick="showTab('per')">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+      <path d="M2 12c0-1.5 2.5-2.5 6-2.5s6 1 6 2.5v2H2v-2Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+    </svg>
+    Personal
+  </div>
 </div>
 
 <!-- ==================== SUBESTACIONES ==================== -->
@@ -961,6 +968,43 @@
       <div class="detail-subtitle" id="uni-detail-kv">230 kV</div>
     </div>
     <div class="detail-body" id="uni-detail-body"></div>
+  </div>
+</div>
+
+<!-- ==================== PERSONAL ==================== -->
+<div class="content" id="tab-per">
+  <div class="search-wrap">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px;">
+      <input type="text" id="per-search" placeholder="🔍 Buscar nombre o RPE..." class="search-input" style="grid-column: 1/-1; padding: 8px;">
+      <select id="per-dept" class="search-input" style="padding: 8px;">
+        <option value="">— Departamento —</option>
+      </select>
+      <select id="per-sector" class="search-input" style="padding: 8px;">
+        <option value="">— Sector —</option>
+        <option value="ORIENTE">Oriente</option>
+        <option value="PONIENTE">Poniente</option>
+        <option value="CERRO PRIETO">Cerro Prieto</option>
+        <option value="SAN LUIS">San Luis</option>
+        <option value="PENDIENTE">Pendiente</option>
+      </select>
+      <button onclick="resetPerFilters()" style="padding: 8px; background: var(--green-dim); border: 1px solid var(--green); color: var(--green); cursor: pointer; border-radius: 4px; font-family: var(--ui);">⟲ Limpiar</button>
+    </div>
+  </div>
+  <div class="list-view">
+    <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--green);">
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">#</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Nombre</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">RPE</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Categoría</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Departamento</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Sector</th>
+          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Tipo</th>
+        </tr>
+      </thead>
+      <tbody id="per-body"></tbody>
+    </table>
   </div>
 </div>
 
@@ -1818,6 +1862,66 @@ if (!cargarDatosLocales()) {
   setStatus('LOCAL (demo)', false);
 }
 renderUniList();
+
+
+// ===== PERSONAL =====
+let PERSONAL_DATA = [];
+
+function renderPerTable(data = PERSONAL_DATA) {
+  const tbody = document.getElementById('per-body');
+  tbody.innerHTML = '';
+  data.forEach((p, i) => {
+    const row = tbody.insertRow();
+    row.style.borderBottom = '1px solid var(--border)';
+    row.innerHTML = `
+      <td style="padding: 8px; color: var(--text-dim);">${i+1}</td>
+      <td style="padding: 8px;">${p.nombre}</td>
+      <td style="padding: 8px; color: var(--green); font-weight: 600;">${p.rpe}</td>
+      <td style="padding: 8px;">${p.categoría}</td>
+      <td style="padding: 8px;">${p.departamento}</td>
+      <td style="padding: 8px; color: #888;">${p.sector}</td>
+      <td style="padding: 8px; color: var(--amber);">${p.tipo}</td>
+    `;
+  });
+}
+
+function filterPersonal() {
+  const search = document.getElementById('per-search').value.toLowerCase();
+  const dept = document.getElementById('per-dept').value;
+  const sector = document.getElementById('per-sector').value;
+  const filtered = PERSONAL_DATA.filter(p => 
+    (!search || p.nombre.toLowerCase().includes(search) || p.rpe.toLowerCase().includes(search)) &&
+    (!dept || p.departamento === dept) &&
+    (!sector || p.sector === sector)
+  );
+  renderPerTable(filtered);
+}
+
+function resetPerFilters() {
+  document.getElementById('per-search').value = '';
+  document.getElementById('per-dept').value = '';
+  document.getElementById('per-sector').value = '';
+  renderPerTable();
+}
+
+function initPersonal() {
+  if (!PERSONAL_DATA || PERSONAL_DATA.length === 0) return;
+  
+  const depts = [...new Set(PERSONAL_DATA.map(p => p.departamento))].sort();
+  const deptSelect = document.getElementById('per-dept');
+  depts.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d;
+    deptSelect.appendChild(opt);
+  });
+  
+  document.getElementById('per-search').addEventListener('input', filterPersonal);
+  document.getElementById('per-dept').addEventListener('change', filterPersonal);
+  document.getElementById('per-sector').addEventListener('change', filterPersonal);
+  
+  renderPerTable();
+}
 
 </script>
 </body>

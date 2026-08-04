@@ -873,13 +873,6 @@
     </svg>
     Unifilares
   </div>
-  <div class="tab" onclick="showTab('per')">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
-      <path d="M2 12c0-1.5 2.5-2.5 6-2.5s6 1 6 2.5v2H2v-2Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
-    </svg>
-    Personal
-  </div>
 </div>
 
 <!-- ==================== SUBESTACIONES ==================== -->
@@ -971,20 +964,10 @@
   </div>
 </div>
 
-<div class="content" id="tab-per">
-  <div class="search-wrap">
-    <input type="text" id="per-search" placeholder="🔍 Buscar nombre o RPE..." class="search-input" oninput="filterPersonal()">
-    <select id="per-dept" class="search-input" style="margin-top:8px;" onchange="filterPersonal()">
-      <option value="">— Departamento —</option>
-    </select>
-  </div>
-  <div style="padding: 12px;" id="per-list"></div>
-</div>
-
 <script>
 // ===== CONFIG =====
 // Raw URL del JSON en GitHub (rama, owner/repo y archivo)
-const DATA_URL = 'https://cdn.jsdelivr.net/gh/mgerardopaz/ztv-app-datos@main/ztvalle_datos.json';
+const DATA_URL = 'https://raw.githubusercontent.com/mgerardopaz/ztv-app-datos/main/ztvalle_datos.json';
 const STORAGE_KEY = 'ztv_datos_v3';
 
 // ===== DATA (fallback inicial / mock) =====
@@ -1236,8 +1219,6 @@ function aplicarDatos(json, origen) {
 
   renderSubList(SUBESTACIONES);
   renderLinList(LINEAS);
-  PERSONAL_DATA = json.personal || [];
-  initPersonal();
 
   const fechaTxt = dataGeneradoFecha ? ` (datos: ${dataGeneradoFecha})` : '';
   if (origen === 'remote') {
@@ -1830,60 +1811,10 @@ function loadCSV(type, input) {
   reader.readAsText(file);
 }
 
-// ===== PERSONAL =====
-let PERSONAL_DATA = [];
-
-function renderPerTable(data = PERSONAL_DATA) {
-  const list = document.getElementById('per-list');
-  if (data.length === 0) {
-    list.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-dim);">— Sin resultados —</div>';
-    return;
-  }
-  list.innerHTML = data.map((p, i) => `
-    <div style="padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 12px;">
-      <div style="display: flex; gap: 12px; margin-bottom: 4px;">
-        <span style="color: var(--text-dim); min-width: 25px;"><strong>${i+1}</strong></span>
-        <span style="color: var(--text-bright); flex: 1;"><strong>${p.nombre}</strong></span>
-        <span style="color: var(--green); font-weight: 600;">${p.rpe}</span>
-      </div>
-      <div style="display: flex; gap: 16px; color: var(--text-dim); font-size: 11px; margin-left: 37px;">
-        <span>${p.categoría}</span>
-        <span>${p.departamento}</span>
-        <span style="color: #888;">${p.sector}</span>
-        <span style="color: var(--amber);">${p.tipo}</span>
-      </div>
-    </div>
-  `).join('');
-}
-
-function filterPersonal() {
-  const search = document.getElementById('per-search').value.toLowerCase();
-  const dept = document.getElementById('per-dept').value;
-  const filtered = PERSONAL_DATA.filter(p => 
-    (!search || p.nombre.toLowerCase().includes(search) || p.rpe.toLowerCase().includes(search)) &&
-    (!dept || p.departamento === dept)
-  );
-  renderPerTable(filtered);
-}
-
-function initPersonal() {
-  if (!PERSONAL_DATA || PERSONAL_DATA.length === 0) return;
-  const depts = [...new Set(PERSONAL_DATA.map(p => p.departamento))].sort();
-  const deptSelect = document.getElementById('per-dept');
-  depts.forEach(d => {
-    const opt = document.createElement('option');
-    opt.value = d;
-    opt.textContent = d;
-    deptSelect.appendChild(opt);
-  });
-  renderPerTable();
-}
-
 // ===== INIT =====
 if (!cargarDatosLocales()) {
   renderSubList(SUBESTACIONES);
   renderLinList(LINEAS);
-  initPersonal();
   setStatus('LOCAL (demo)', false);
 }
 renderUniList();

@@ -978,17 +978,17 @@
       <option value="">— Departamento —</option>
     </select>
   </div>
-  <div style="padding: 16px;">
-    <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+  <div style="padding: 12px; font-size: 11px; overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 11px; table-layout: auto;">
       <thead>
-        <tr style="border-bottom: 2px solid var(--green);">
-          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600; width: 30px;">#</th>
-          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Nombre</th>
-          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">RPE</th>
-          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Categoría</th>
-          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Departamento</th>
-          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Sector</th>
-          <th style="padding: 8px; text-align: left; color: var(--green); font-weight: 600;">Tipo</th>
+        <tr style="border-bottom: 1px solid var(--green);">
+          <th style="padding: 6px 4px; text-align: center; color: var(--green); font-weight: 600; width: 25px;">#</th>
+          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Nombre</th>
+          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">RPE</th>
+          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Categoría</th>
+          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Depto</th>
+          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Sector</th>
+          <th style="padding: 6px 4px; text-align: left; color: var(--green); font-weight: 600;">Tipo</th>
         </tr>
       </thead>
       <tbody id="per-body"></tbody>
@@ -1854,13 +1854,13 @@ function renderPerTable(data = PERSONAL_DATA) {
   data.forEach((p, i) => {
     const row = tbody.insertRow();
     row.innerHTML = `
-      <td style="padding: 8px;">${i+1}</td>
-      <td style="padding: 8px;">${p.nombre}</td>
-      <td style="padding: 8px; color: var(--green); font-weight: 600;">${p.rpe}</td>
-      <td style="padding: 8px;">${p.categoría}</td>
-      <td style="padding: 8px;">${p.departamento}</td>
-      <td style="padding: 8px; color: #888;">${p.sector}</td>
-      <td style="padding: 8px; color: var(--amber);">${p.tipo}</td>
+      <td style="padding: 6px 4px; text-align: center; font-weight: 600; color: var(--text-dim);">${i+1}</td>
+      <td style="padding: 6px 4px;">${p.nombre}</td>
+      <td style="padding: 6px 4px; color: var(--green); font-weight: 600;">${p.rpe}</td>
+      <td style="padding: 6px 4px; font-size: 10px;">${p.categoría}</td>
+      <td style="padding: 6px 4px; font-size: 10px;">${p.departamento}</td>
+      <td style="padding: 6px 4px; color: #888; font-size: 10px;">${p.sector}</td>
+      <td style="padding: 6px 4px; color: var(--amber); font-size: 10px;">${p.tipo}</td>
     `;
   });
 }

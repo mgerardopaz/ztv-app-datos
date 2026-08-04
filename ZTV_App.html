@@ -1142,7 +1142,6 @@ const UNIFILARES = [
 let currentSub = null;
 let currentLin = null;
 let currentUni = null;
-let PERSONAL_DATA = [];
 let dataSource = 'mock'; // 'mock' | 'local' | 'remote'
 let dataGeneradoFecha = null;
 
@@ -1847,6 +1846,8 @@ function loadCSV(type, input) {
 }
 
 // ===== PERSONAL =====
+let PERSONAL_DATA = [];
+
 function renderPerTable(data = PERSONAL_DATA) {
   const tbody = document.getElementById('per-body');
   tbody.innerHTML = '';
@@ -1891,7 +1892,6 @@ function initPersonal() {
 if (!cargarDatosLocales()) {
   renderSubList(SUBESTACIONES);
   renderLinList(LINEAS);
-  initPersonal();
   setStatus('LOCAL (demo)', false);
 }
 renderUniList();
